@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#fdf2f8">
-<title>Nuestra aventura💘</title>
+<title>Nuestra Aventura💘</title>
 <style>
 :root{--ink:#2a1b3d;--mut:#7c6f8f;--line:#eadcf5;--ok:#2e9e4f;--bad:#d92d20;--pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23ec4899' fill-opacity='.14'%3E%3Cpath d='M20 34c-9-7-14-12-14-18a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 6-5 11-14 18z'/%3E%3Cpath transform='translate(64 62) scale(.8)' d='M20 34c-9-7-14-12-14-18a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 6-5 11-14 18z'/%3E%3C/g%3E%3C/svg%3E")}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
@@ -168,9 +168,9 @@ p{line-height:1.45}
 .c.me{opacity:.55}
 
 /* Sopa */
-.sg{display:grid;gap:2px;max-width:420px;margin:0 auto 12px;touch-action:none}
-.sc{aspect-ratio:1;border-radius:6px;background:#f5eefc;font-weight:800;font-size:clamp(12px,4vw,19px);padding:0}
-.sc.sel{background:#fde68a;transform:scale(1.06)}
+.sg{display:grid;gap:3px;max-width:420px;margin:0 auto 12px;touch-action:none}
+.sc{aspect-ratio:1;border-radius:6px;background:#f5eefc;font-weight:800;font-size:clamp(13px,4.2vw,19px);padding:0;touch-action:none;transition:background .1s,transform .1s}
+.sc.sel{background:#fde68a;color:var(--ink);transform:scale(1.06)}
 .sc.f{background:var(--c);color:#fff}
 .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 .chip{padding:5px 11px;border-radius:99px;background:#f3e8ff;font-weight:700;font-size:13px}
@@ -1013,7 +1013,7 @@ function laberinto(box, N, api) {
 }
 
 /* =====================================================================
-   SOPA DE LETRAS (Arrastrando el dedo o tocando inicio y fin)
+   SOPA DE LETRAS (Arreglada para móvil: sin destruir nodos + touch fluido)
    ===================================================================== */
 function sopa(box, N, api) {
   const pals = [...new Set((N.palabras || ['MORR', 'ATLETI']).map(w => norm(w).replace(/[^A-ZÑ]/g, '')).filter(Boolean))];
@@ -1042,17 +1042,30 @@ function sopa(box, N, api) {
   let g = null;
   for (let t = 0; t < 40 && !g; t++) g = gen();
   if (!g) { box.innerHTML = '<p>No se ha podido generar la sopa. Revisa las palabras en contenido.js.</p>'; return; }
-  const hall = new Set(), enc = new Set();
-  let ini = null, prevSel = new Set(), vivo = true;
-  box.innerHTML = `<div class="gt">Sopa de letras</div><p class="gs">Arrastra el dedo (o toca inicio y fin) sobre cada palabra.</p><div class="sg" id="sg" style="grid-template-columns:repeat(${S},1fr)"></div><div class="chips" id="ch"></div>`;
 
-  const pinta = () => {
-    $('#sg').innerHTML = g.map((f, y) => f.map((c, x) => {
-      const k = x + ',' + y;
-      const isSel = prevSel.has(k) || (ini && ini.x === x && ini.y === y);
-      return `<button class="sc ${enc.has(k) ? 'f' : ''} ${isSel ? 'sel' : ''}" data-x="${x}" data-y="${y}">${c}</button>`;
-    }).join('')).join('');
-    $('#ch').innerHTML = pals.map(p => `<span class="chip ${hall.has(p) ? 'h' : ''}">${p}</span>`).join('');
+  const hall = new Set(), enc = new Set();
+  let ini = null, ultimaCelda = null, prevSel = new Set(), vivo = true, arrastrando = false;
+
+  box.innerHTML = `<div class="gt">Sopa de letras</div><p class="gs">Arrastra el dedo (o toca inicio y fin) sobre cada palabra.</p>
+  <div class="sg" id="sg" style="grid-template-columns:repeat(${S},1fr)">${
+    g.map((f, y) => f.map((c, x) => `<button type="button" class="sc" data-x="${x}" data-y="${y}">${c}</button>`).join('')).join('')
+  }</div>
+  <div class="chips" id="ch">${
+    pals.map(p => `<span class="chip" data-w="${p}">${p}</span>`).join('')
+  }</div>`;
+
+  const sg = $('#sg');
+  const celdas = [...sg.querySelectorAll('.sc')];
+  const chips = [...$('#ch').querySelectorAll('.chip')];
+
+  const actualizaClases = () => {
+    celdas.forEach(b => {
+      const k = b.dataset.x + ',' + b.dataset.y;
+      const isSel = prevSel.has(k) || (ini && ini.x === +b.dataset.x && ini.y === +b.dataset.y);
+      b.classList.toggle('f', enc.has(k));
+      b.classList.toggle('sel', Boolean(isSel));
+    });
+    chips.forEach(ch => ch.classList.toggle('h', hall.has(ch.dataset.w)));
   };
 
   const lineaCeldas = (a, b) => {
@@ -1065,58 +1078,132 @@ function sopa(box, N, api) {
   };
 
   const comprobarLinea = (a, b) => {
+    if (!a || !b) return false;
     const res = lineaCeldas(a, b);
     if (!res) return false;
     const rev = [...res.s].reverse().join('');
     const w = pals.find(p => !hall.has(p) && (p === res.s || p === rev));
     if (w) {
       playSound('correct');
-      hall.add(w); res.cs.forEach(c => enc.add(c)); api.prog(hall.size / pals.length);
-      if (hall.size === pals.length) { vivo = false; api.after(() => api.fin(true, 'Las has encontrado todas.'), 600); }
+      hall.add(w);
+      res.cs.forEach(c => enc.add(c));
+      api.prog(hall.size / pals.length);
+      if (hall.size === pals.length) {
+        vivo = false;
+        api.after(() => api.fin(true, 'Las has encontrado todas.'), 600);
+      }
       return true;
     }
     return false;
   };
 
-  const sg = $('#sg');
-  sg.onclick = e => {
-    const b = e.target.closest('button');
-    if (!b || !vivo) return;
-    const x = +b.dataset.x, y = +b.dataset.y;
-    if (!ini || (ini.x === x && ini.y === y)) { ini = ini ? null : { x, y }; prevSel.clear(); pinta(); return; }
-    comprobarLinea(ini, { x, y });
-    ini = null; prevSel.clear(); pinta();
+  const celdaEnPunto = (clientX, clientY) => {
+    const el = document.elementFromPoint(clientX, clientY);
+    const btn = el ? el.closest('.sc') : null;
+    if (btn && sg.contains(btn)) return { x: +btn.dataset.x, y: +btn.dataset.y };
+    const rect = sg.getBoundingClientRect();
+    if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return null;
+    const x = Math.min(S - 1, Math.max(0, Math.floor((clientX - rect.left) / (rect.width / S))));
+    const y = Math.min(S - 1, Math.max(0, Math.floor((clientY - rect.top) / (rect.height / S))));
+    return { x, y };
   };
 
-  let dragging = false;
+  const iniciar = pos => {
+    if (!vivo || !pos) return;
+    arrastrando = true;
+    ini = pos;
+    ultimaCelda = pos;
+    prevSel = new Set([pos.x + ',' + pos.y]);
+    actualizaClases();
+  };
+
+  const mover = pos => {
+    if (!arrastrando || !ini || !vivo || !pos) return;
+    ultimaCelda = pos;
+    const res = lineaCeldas(ini, pos);
+    if (res) {
+      prevSel = new Set(res.cs);
+      actualizaClases();
+    }
+  };
+
+  const soltar = posFinal => {
+    if (!arrastrando || !ini) return;
+    arrastrando = false;
+    const destino = posFinal || ultimaCelda;
+    if (destino && (ini.x !== destino.x || ini.y !== destino.y)) {
+      comprobarLinea(ini, destino);
+      ini = null;
+      ultimaCelda = null;
+      prevSel.clear();
+      actualizaClases();
+    }
+  };
+
+  // Soporte táctil móvil
   sg.addEventListener('touchstart', e => {
     if (!vivo) return;
-    const t = e.touches[0], el = document.elementFromPoint(t.clientX, t.clientY)?.closest('.sc');
-    if (el) { dragging = true; ini = { x: +el.dataset.x, y: +el.dataset.y }; prevSel = new Set([ini.x + ',' + ini.y]); pinta(); }
-  }, { passive: true });
+    e.preventDefault();
+    const t = e.touches[0];
+    const pos = celdaEnPunto(t.clientX, t.clientY);
+    if (ini && !arrastrando && pos && (ini.x !== pos.x || ini.y !== pos.y)) {
+      comprobarLinea(ini, pos);
+      ini = null;
+      ultimaCelda = null;
+      prevSel.clear();
+      actualizaClases();
+      return;
+    }
+    iniciar(pos);
+  }, { passive: false });
 
   sg.addEventListener('touchmove', e => {
-    if (!dragging || !ini || !vivo) return;
+    if (!arrastrando || !vivo) return;
     e.preventDefault();
-    const t = e.touches[0], el = document.elementFromPoint(t.clientX, t.clientY)?.closest('.sc');
-    if (el) {
-      const res = lineaCeldas(ini, { x: +el.dataset.x, y: +el.dataset.y });
-      if (res) { prevSel = new Set(res.cs); pinta(); }
-    }
+    const t = e.touches[0];
+    mover(celdaEnPunto(t.clientX, t.clientY));
   }, { passive: false });
 
   sg.addEventListener('touchend', e => {
-    if (!dragging || !ini) return;
-    dragging = false;
-    const t = e.changedTouches[0], el = document.elementFromPoint(t.clientX, t.clientY)?.closest('.sc');
-    if (el && (ini.x !== +el.dataset.x || ini.y !== +el.dataset.y)) {
-      comprobarLinea(ini, { x: +el.dataset.x, y: +el.dataset.y });
-      ini = null; prevSel.clear(); pinta();
-    }
+    if (!arrastrando) return;
+    e.preventDefault();
+    const t = e.changedTouches[0];
+    soltar(celdaEnPunto(t.clientX, t.clientY));
+  }, { passive: false });
+
+  sg.addEventListener('touchcancel', () => {
+    arrastrando = false;
+    ini = null;
+    ultimaCelda = null;
+    prevSel.clear();
+    actualizaClases();
   });
 
-  api.onClose(() => { vivo = false; });
-  pinta();
+  // Soporte ratón ordenador
+  sg.addEventListener('mousedown', e => {
+    if (!vivo) return;
+    const pos = celdaEnPunto(e.clientX, e.clientY);
+    if (ini && !arrastrando && pos && (ini.x !== pos.x || ini.y !== pos.y)) {
+      comprobarLinea(ini, pos);
+      ini = null;
+      ultimaCelda = null;
+      prevSel.clear();
+      actualizaClases();
+      return;
+    }
+    iniciar(pos);
+  });
+
+  const onMouseMove = e => { if (arrastrando) mover(celdaEnPunto(e.clientX, e.clientY)); };
+  const onMouseUp = e => { if (arrastrando) soltar(celdaEnPunto(e.clientX, e.clientY)); };
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
+
+  api.onClose(() => {
+    vivo = false;
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
+  });
 }
 
 /* =====================================================================
