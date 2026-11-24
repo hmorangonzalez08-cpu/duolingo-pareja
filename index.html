@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#fdf2f8">
-<title>Para Morr💘</title>
+<title>Nuestra aventura💘</title>
 <style>
 :root{--ink:#2a1b3d;--mut:#7c6f8f;--line:#eadcf5;--ok:#2e9e4f;--bad:#d92d20;--pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23ec4899' fill-opacity='.14'%3E%3Cpath d='M20 34c-9-7-14-12-14-18a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 6-5 11-14 18z'/%3E%3Cpath transform='translate(64 62) scale(.8)' d='M20 34c-9-7-14-12-14-18a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 6-5 11-14 18z'/%3E%3C/g%3E%3C/svg%3E")}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
@@ -207,7 +207,61 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&', '<': '<', '>': '>', '"': '"' }[c]));
 const sh = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const rnd = n => Math.floor(Math.random() * n);
-const norm = s => String(s).toUpperCase().replace(/Ñ/g, '\u0001').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\u0001/g, 'Ñ');
+const norm = s => String(s).toUpperCase().replace(/Ñ/g, '\u0001').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0001/g, 'Ñ');
+
+// --- MOTOR DE SONIDOS ESTILO DUOLINGO (WEB AUDIO API) ---
+let audioCtx = null;
+function playSound(type) {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const now = audioCtx.currentTime;
+
+    if (type === 'correct') {
+      const notes = [523.25, 659.25, 783.99];
+      notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+        gain.gain.setValueAtTime(0.16, now + i * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.35);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.08);
+        osc.stop(now + i * 0.08 + 0.35);
+      });
+    } else if (type === 'wrong') {
+      const notes = [240, 185];
+      notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + i * 0.14);
+        gain.gain.setValueAtTime(0.2, now + i * 0.14);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.14 + 0.28);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.14);
+        osc.stop(now + i * 0.14 + 0.28);
+      });
+    } else if (type === 'win') {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.1);
+        gain.gain.setValueAtTime(0.18, now + i * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.5);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.1);
+        osc.stop(now + i * 0.1 + 0.5);
+      });
+    }
+  } catch (e) {}
+}
 
 const grad = L => `linear-gradient(135deg,${L.color},${L.color2 || '#ec4899'})`;
 const estilo = L => `--c:${L.color};--g:${grad(L)}`;
@@ -309,7 +363,7 @@ function home(centrar) {
   html += `<div class="fin" style="--c:#c026d3;--g:linear-gradient(135deg,#a855f7,#ec4899)"><button class="nd ${fin ? 'cur' : 'lock'}" id="regalo" aria-label="Regalo final">${fin ? '<span class="tip">ABRIR</span>' : ''}🎁</button></div>`;
   h.innerHTML = html;
   h.querySelectorAll('.nd[data-l]').forEach(b => b.onclick = () => tocar(+b.dataset.l, +b.dataset.i, b));
-  $('#regalo').onclick = e => { if (todoHecho()) final(); else { e.currentTarget.classList.add('shk'); setTimeout(() => e.currentTarget.classList.remove('shk'), 400); } };
+  $('#regalo').onclick = e => { if (todoHecho()) final(); else { playSound('wrong'); e.currentTarget.classList.add('shk'); setTimeout(() => e.currentTarget.classList.remove('shk'), 400); } };
   if (centrar) {
     const cur = h.querySelector('.nd.cur');
     if (cur) cur.scrollIntoView({ block: 'center' });
@@ -325,6 +379,7 @@ function hoja(html, L) {
 
 function tocar(l, i, el) {
   if (estado(l, i) === 'lock') {
+    playSound('wrong');
     el.classList.add('shk'); setTimeout(() => el.classList.remove('shk'), 400);
     return;
   }
@@ -356,11 +411,13 @@ function jugar(l, i) {
     fin(ok, info) {
       limpiar();
       if (ok) {
+        playSound('win');
         api.prog(1);
         api.main.innerHTML = `<div class="res"><div class="big">🎉</div><h2>¡Reto superado!</h2><p>${esc(info || '')}</p></div>`;
         api.footer('<button class="btn g" id="c">Continuar</button>');
         $('#c').onclick = () => { salir(); completar(l, i); };
       } else {
+        playSound('wrong');
         api.main.innerHTML = `<div class="res"><div class="big">😅</div><h2>Casi</h2><p>${esc(info || 'Inténtalo otra vez.')}</p></div>`;
         api.footer('<button class="btn" id="r">Reintentar</button><button class="btn sec" id="s">Salir</button>');
         $('#r').onclick = arrancar;
@@ -419,6 +476,7 @@ function lluvia() {
   }
 }
 function nivelCompleto(l) {
+  playSound('win');
   const ult = l === C.niveles.length - 1;
   const sig = !ult ? C.niveles[l + 1] : null;
   cubrir(`<div class="res"><div class="big">🏆</div><h1>Nivel ${l + 1} completado</h1><p>${ult ? 'Has terminado todos los niveles. Queda una última cosa.' : 'Siguiente: ' + esc(sig.subtitulo || sig.titulo)}</p><div class="btnwrap"><button class="btn" id="c">${ult ? 'Abrir regalo' : 'Seguir'}</button></div></div>`, C.niveles[l]);
@@ -426,6 +484,7 @@ function nivelCompleto(l) {
   $('#c').onclick = () => { cerrarCover(); if (ult) final(); else home(true); };
 }
 function final() {
+  playSound('win');
   const F = C.final;
   cubrir(`<div class="res" style="max-width:420px;padding:24px"><h1>${esc(F.saludo)}</h1>${fotos.length ? `<img id="carr" class="carr" src="${fotos[0]}" alt="">` : '<div class="big">💖</div>'}${F.parrafos.map(p => `<p class="final">${esc(p)}</p>`).join('')}<p class="final"><b>${esc(F.despedida)}</b></p><p class="final">${esc(F.firma)}</p><div class="btnwrap"><button class="btn" id="c">Volver al camino</button></div></div>`, C.niveles[C.niveles.length - 1]);
   let k = 0;
@@ -530,9 +589,11 @@ function preguntas(api, qs) {
       const bien = ops[sel].ok;
       btns.forEach((b, k) => { b.classList.remove('sel'); if (ops[k].ok) b.classList.add('ok'); else if (k === sel) b.classList.add('bad'); });
       if (bien) {
+        playSound('correct');
         cola.shift(); hechas++; api.prog(hechas / total);
         api.footer('<div class="fb">✔ Correcto</div><button class="btn g" id="n">Continuar</button>', 'ok');
       } else {
+        playSound('wrong');
         fallos++; cola.push(cola.shift());
         api.footer('<div class="fb">✘ Esa no era. La repetiremos.</div><button class="btn r" id="n">Continuar</button>', 'bad');
       }
@@ -562,7 +623,6 @@ function tetris(box, N, api) {
 
   const dib = () => {
     cx.fillStyle = '#1e1b4b'; cx.fillRect(0, 0, cv.width, cv.height);
-    // Cuadrícula sutil para ayudar a alinear en móvil
     cx.strokeStyle = 'rgba(255,255,255,0.05)';
     cx.lineWidth = 1;
     for (let i = 1; i < COLS; i++) { cx.beginPath(); cx.moveTo(i * cell, 0); cx.lineTo(i * cell, cv.height); cx.stroke(); }
@@ -570,11 +630,9 @@ function tetris(box, N, api) {
     for (let j = 0; j < ROWS; j++) for (let i = 0; i < COLS; i++) if (tab[j][i]) blk(cx, tab[j][i], i, j, cell);
 
     if (pz) {
-      // Calcular dónde caería la pieza (Ghost piece)
       let gy = pz.y;
       while (!choca(pz.m, pz.x, gy + 1)) gy++;
 
-      // Dibujar guía vertical y silueta de aterrizaje
       pz.m.forEach((r, j) => r.forEach((v, i) => {
         if (v) {
           const px = (pz.x + i) * cell;
@@ -587,7 +645,6 @@ function tetris(box, N, api) {
         }
       }));
 
-      // Dibujar pieza activa
       pz.m.forEach((r, j) => r.forEach((v, i) => { if (v) blk(cx, pz.c, pz.x + i, pz.y + j, cell); }));
     }
 
@@ -614,7 +671,7 @@ function tetris(box, N, api) {
     for (let j = ROWS - 1; j >= 0;) {
       if (tab[j].every(v => v)) { tab.splice(j, 1); tab.unshift(Array(COLS).fill(0)); n++; } else j--;
     }
-    if (n) { lin += n; pts += [0, 100, 300, 500, 800][n]; }
+    if (n) { playSound('correct'); lin += n; pts += [0, 100, 300, 500, 800][n]; }
     api.prog(pts / meta); upd();
     if (pts >= meta) { fin(true); return; }
     nueva();
@@ -633,7 +690,6 @@ function tetris(box, N, api) {
   const loop = () => { if (!vivo) return; bajar(); if (vivo) { dib(); timer = setTimeout(loop, vel()); } };
   box.querySelectorAll('.pad5 button').forEach(b => b.onclick = () => acc(b.dataset.a));
 
-  // Gestos táctiles directos sobre el tablero de Tetris
   let tx = 0, ty = 0, movedX = false;
   cv.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; movedX = false; }, { passive: true });
   cv.addEventListener('touchmove', e => {
@@ -687,7 +743,12 @@ function ahorcado(box, N, api) {
     const b = box.querySelector(`.k[data-l="${L}"]`);
     const acierto = clave.includes(L);
     if (b) b.classList.add(acierto ? 'ok' : 'no');
-    if (!acierto) fallos++;
+    if (acierto) {
+      playSound('correct');
+    } else {
+      playSound('wrong');
+      fallos++;
+    }
     pinta();
     const completa = clave.every(c => !esLetra(c) || usadas.has(c));
     const hechos = clave.filter(c => esLetra(c) && usadas.has(c)).length, tot = clave.filter(esLetra).length;
@@ -732,7 +793,8 @@ function wordle(box, N, api) {
       const k = box.querySelector(`.k[data-k="${l}"]`);
       if (k) { k.classList.remove('ok', 'med', 'no'); k.classList.add(est[l]); }
     }
-    if (cur === pal) { vivo = false; api.prog(1); api.after(() => api.fin(true, 'Palabra: ' + pal), 700); return; }
+    if (cur === pal) { playSound('correct'); vivo = false; api.prog(1); api.after(() => api.fin(true, 'Palabra: ' + pal), 700); return; }
+    if (r.includes('ok') || r.includes('med')) playSound('correct'); else playSound('wrong');
     fila++; cur = ''; api.prog(fila / max);
     if (fila >= max) { vivo = false; api.after(() => api.fin(false, 'Se acabaron los intentos.'), 700); }
   };
@@ -791,6 +853,7 @@ function snake(box, N, api) {
     if (h.x < 0 || h.y < 0 || h.x >= G || h.y >= G || muros.has(h.x + ',' + h.y) || choque) { fin(false); return; }
     cuerpo.unshift(h);
     if (come) {
+      playSound('correct');
       pts++; $('#sp').textContent = pts; api.prog(pts / meta);
       if (pts >= meta) { dib(); fin(true); return; }
       poner();
@@ -826,10 +889,12 @@ function memoria(box, N, api) {
     b.classList.add('on');
     if (!a) { a = b; return; }
     if (a.dataset.id === b.dataset.id) {
+      playSound('correct');
       a.classList.replace('on', 'ok'); b.classList.replace('on', 'ok');
       a = null; n++; $('#np').textContent = n; api.prog(n / pares);
       if (n === pares) { bloqueo = true; api.after(() => api.fin(true, `Con ${f} fallos.`), 600); }
     } else {
+      playSound('wrong');
       f++; $('#nf').textContent = f;
       bloqueo = true;
       const p = a; a = null;
@@ -1005,6 +1070,7 @@ function sopa(box, N, api) {
     const rev = [...res.s].reverse().join('');
     const w = pals.find(p => !hall.has(p) && (p === res.s || p === rev));
     if (w) {
+      playSound('correct');
       hall.add(w); res.cs.forEach(c => enc.add(c)); api.prog(hall.size / pals.length);
       if (hall.size === pals.length) { vivo = false; api.after(() => api.fin(true, 'Las has encontrado todas.'), 600); }
       return true;
@@ -1022,7 +1088,6 @@ function sopa(box, N, api) {
     ini = null; prevSel.clear(); pinta();
   };
 
-  // Soporte táctil de arrastre continuo
   let dragging = false;
   sg.addEventListener('touchstart', e => {
     if (!vivo) return;

@@ -42,7 +42,8 @@ const CONTENIDO = {
     parrafos: [
       "Holaaa mi bebe lindoooooo, ya veo que has podido superar todo el minijuego y has conseguido pasarte mi duolingo enteroooo. Te quiero un montón y espero que te haya gustado todo lo que he preparado para ti, porque lo he hecho con todo mi amor y cariño. <3",
       "Ya quería aprovechar este momento para decirte que eres la mujer más maravillosa del mundo y que me siento muy afortunado de tenerte a mi lado. Cada día contigo es una aventura y un regalo, y no puedo esperar a seguir construyendo recuerdos juntos. Espero poder criar contigo a Enzo y Noah y que nunca te arrepientas de nada de lo que estamos logrando y haciendo dia a dia porque para mi es super importante. Agradecerte por ser la persona que eres conmigo y por amarme de la manera en que lo haces, porque me haces sentir especial y amado cada día.",
-      "Quiero que sepas que siempre estaré aquí para ti, en los buenos y malos momentos, y que mi amor por ti es incondicional. Eres mi compañera, mi confidente y mi todo, y no puedo imaginar mi vida sin ti. Gracias por ser tú y por hacerme tan feliz. Te amo con todo mi corazón, Morr💘."
+      "Quiero que sepas que siempre estaré aquí para ti, en los buenos y malos momentos, y que mi amor por ti es incondicional. Eres mi compañera, mi confidente y mi todo, y no puedo imaginar mi vida sin ti. Gracias por ser tú y por hacerme tan feliz. Te amo con todo mi corazón, Morr💘.",
+      "Espero que nunca te canses de mi y de mis mini detalles que te hago"
     ],
     despedida: "Gracias por todo, mi pequee,te quiero mucho💘",
     firma: "— Hectitorrr:)"
@@ -58,12 +59,12 @@ const CONTENIDO = {
         // --- BLOQUE 1 (Preguntas 1 a 4) ---
         { q: "¿Dónde fuimos la primera vez que quedamos a solas?", ok: "A dar un paseo por el parque", mal: ["Al cine", "A tomar un café", "A cenar"] },
         { q: "¿Qué es lo primero que pensé cuando te vi por primera vez?", ok: "DIOSSS QUE MUJER TAN GUAPA Y TODO MIA!", mal: ["¡Qué bajita es!", "Se me va a caer la baba", "Qué buen rollo transmite"] },
-        { q: "¿Cuál es nuestra canción por excelencia?", ok: "Aire, de Lucho RK", mal: ["Una de reggaeton lento", "El himno del Atleti", "Una balada en inglés"] },
-        { q: "¿Qué prenda mía te queda mejor?", ok: "La camiseta del Atleti", mal: ["Una sudadera negra", "Mis pantalones de deporte", "Un pijama de invierno"] },
+        { q: "¿Cuál es nuestra canción por excelencia?", ok: "Aire, de Lucho RK", mal: ["Cosas que no te dije - Mora", "El himno del Atleti", "Muero x esa Carita - ceaxe"] },
+        { q: "¿Qué prenda mía te queda mejor?", ok: "Cualquier camisetita del atleti", mal: ["Una sudadera negra", "Mis pantalones de deporte", "Un pijama de invierno"] },
 
         // --- BLOQUE 2 (Preguntas 5 a 8) ---
-        { q: "¿Cómo suelo llamarte más cariñosamente?", ok: "Morrr", mal: ["Cariño", "Princesa", "Gordi"] },
-        { q: "¿Qué día marcó el inicio de nuestra historia?", ok: "Un día 7", mal: ["El 14 de febrero", "El 24 de diciembre", "El 1 de mayo"] },
+        { q: "¿Cómo suelo llamarte más cariñosamente?", ok: "Morrr", mal: ["Peque", "Princesa", "Gordi"] },
+        { q: "¿Qué día marcó el inicio de nuestra historia?", ok: "El 4 de noviembre", mal: ["El 7 de julio", "El 21 de noviembre", "El 1 de septiembre"] },
         { q: "¿Qué animalito te enamoró por completo en aquel día de animalitos que pasamos juntos?", ok: "Los pingüinos", mal: ["Los pandas", "Los delfines", "Los koalas"] },
         { q: "¿Cual es tu posición favorita para dormir o estar juntos?", ok: "Tú (encima de mí)", mal: ["En un lado apartado sin mi", "Cerca de mí", "Ninguno, no te aguanto"] },
 
@@ -106,27 +107,27 @@ const CONTENIDO = {
       color: "#8b5cf6", color2: "#f472b6",
       preguntas: [
         // --- BLOQUE 1 ---
-        { q: "¿Cuál fue el primer ramo que te regalé y que tanto te gustó?", ok: "El primer ramo de flores, que te dejó súper linda", mal: ["Un ramo de tulipanes azules", "Un centro de mesa", "Unas flores secas"] },
+        { q: "¿Cuál fue el primer ramo que te regalé y que tanto te gustó?", ok: "Un ramo con una rosa amarilla que te veias super linda", mal: ["Un ramo de tulipanes azules", "Un centro de mesa", "Unas flores secas"] },
         { q: "¿Qué pasa siempre en nuestras fotos más espontáneas?", ok: "Que salimos haciendo el tonto o 'cucuuu'", mal: ["Que salimos súper serios", "Que siempre salen borrosas", "Que miramos hacia otro lado"] },
         { q: "¿Qué te dije aquella vez que te hice una foto en un paisaje precioso?", ok: "Que no sabía si estaba más enamorado de ti o del paisaje", mal: ["Que te apartaras que tapabas las vistas", "Que hacía demasiado frío", "Que repitiéramos la foto diez veces"] },
-        { q: "¿Qué comentario gracioso pusimos en aquella foto donde salíamos con tres perritas?", ok: "Con tres perras...", mal: ["Paseando por el campo", "Tarde de perros", "Nuestras mascotas"] },
+        { q: "¿Qué comentario gracioso dije en aquella foto donde salíamos con las perritas?", ok: "Con tres perras...", mal: ["Paseando por el campo", "Tarde de perros", "Nuestras mascotas"] },
 
         // --- BLOQUE 2 ---
-        { q: "¿Qué dijimos de nuestra foto más normal pero en el día más importante de nuestras vidas?", ok: "Que era nuestra foto más normal en el día más importante", mal: ["Que salíamos fatal", "Que fue un día cualquiera", "Que nos pillaron desprevenidos"] },
-        { q: "¿Qué pasa cuando salimos juntos de compras?", ok: "Que nos lo pasamos genial viendo cosas juntos", mal: ["Que nos enfadamos a los cinco minutos", "Que no entramos en ninguna tienda", "Que siempre se nos olvida la cartera"] },
+        { q: "¿Qué posición es la que tanto te gusta?", ok: "Tu encima mia mirandome a los ojos", mal: ["A 4", "Patitas al hombro", "Yo encima tuya"] },
+        { q: "¿Qué pasa cuando salimos juntos de compras?", ok: "Que nos lo pasamos genial viendo cosas juntos, y nos distraimos en los probadores jejej", mal: ["Que nos enfadamos a los cinco minutos", "Que no entramos en ninguna tienda", "Que siempre se nos olvida la cartera"] },
         { q: "¿Qué te digo siempre sobre el 'flow' que tienes en las fotos?", ok: "Que tienes más flow que yo", mal: ["Que tienes que aprender a posar", "Que yo visto mejor", "Que siempre pones la misma cara"] },
-        { q: "¿Qué ocurrió con aquella foto que se coló por error en nuestros recuerdos?", ok: "Que dijimos: 'Ups, esta foto creo que no era...'", mal: ["Que la borramos al instante", "Que era nuestra foto favorita", "Que salía un desconocido"] },
+        { q: "¿Qué decía siempre cuando nos estabamos conociendo y decia algo fuera de lugar?", ok: "#broma#bromi#bromita", mal: ["UPSSSSSSS", "MENTIRAAAAAA", "ME HACKEARON EL MOVIL"] },
 
         // --- BLOQUE 3 ---
-        { q: "¿Cuál es nuestra comida o plan estrella para una cita improvisada en coche?", ok: "Dar una vuelta por donde quieras y acabar cenando juntos", mal: ["Ir a lavar el coche", "Quedarnos aparcados sin hablar", "Ir a hacer la compra semanal"] },
+        { q: "¿Cuál es mi plan estrella para una cita improvisada?", ok: "Ir a un mirador, cenar juntos y tener nuestro momento intimo", mal: ["Hacer cosas de mayores durante todo el dia", "Dar una vuelta por el centro", "Que me dejes jugar a la play"] },
         { q: "¿Qué es lo que más me gusta hacerte en el pelo cuando estamos tumbados?", ok: "Caricias hasta que te quedas frita", mal: ["Despeinarte a propósito", "Hacerte trenzas", "Echarte laca"] },
         { q: "¿Qué dulce o merienda nos pega más para una tarde de frío?", ok: "Chocolate caliente con churros o tortitas", mal: ["Una ensalada César", "Un vaso de agua del tiempo", "Fruta cortada"] },
         { q: "¿Qué comida rápida es apuesta segura para una noche de peli en casa?", ok: "Tu hamburguesa o pizza favorita", mal: ["Sopa de verduras", "Pescado hervido", "Arroz blanco"] },
 
         // --- BLOQUE 4 ---
-        { q: "¿Cuál es tu postre favorito cuando salimos a darnos un capricho?", ok: "Tu postre o helado favorito", mal: ["Una pieza de fruta", "Un yogur natural", "Nada, nunca pedimos postre"] },
-        { q: "¿Qué plan navideño o de invierno nos encanta hacer cogidos de la mano?", ok: "Pasear viendo las luces con algo calentito", mal: ["Ir a la piscina descubierta", "Quedarnos cada uno en su casa", "Ir de rebajas a primera hora"] },
-        { q: "¿Qué pasa cada vez que nos hacemos una foto jugando al 'Cucú'?", ok: "Que acabamos partiéndonos de risa", mal: ["Que nos sale a la primera sin reírnos", "Que nos enfadamos", "Que no guardamos ninguna"] },
+        { q: "¿Cuál es tu postre favorito cuando salimos a darnos un capricho?", ok: "Yo", mal: ["Una pieza de fruta", "Un yogur natural", "Nada, nunca pedimos postre"] },
+        { q: "¿Qué plan navideño o de invierno me encantaria hacer cogidos de la mano?", ok: "Pasear viendo las luces con algo calentito", mal: ["Ir a la piscina descubierta", "Quedarnos cada uno en su casa", "Ir de rebajas a primera hora"] },
+        { q: "¿Qué pasa despues de decirte un piropo?", ok: "Que te pones roja como un tomate", mal: ["Te da la verguenza y te ries como una cerdita", "Me lo devuelves con algo más bonito", "Que te enfadas"] },
         { q: "¿Cómo describimos nuestras fotos cuando vamos arreglados?", ok: "Que vaya par de guapos somos", mal: ["Que vamos demasiado informales", "Que nos falta combinar la ropa", "Que parecemos hermanos"] },
 
         // --- BLOQUE 5 ---
@@ -156,9 +157,9 @@ const CONTENIDO = {
       color: "#c026d3", color2: "#fb7185",
       preguntas: [
         // --- BLOQUE 1 ---
-        { q: "¿Qué fecha en noviembre marcó un antes y un después para dar el paso?", ok: "El sábado 7 de noviembre", mal: ["El 31 de octubre", "El 15 de noviembre", "El 1 de diciembre"] },
-        { q: "¿Qué pasó en agosto que nos hizo darnos cuenta de lo fuerte que era lo nuestro?", ok: "Que tras un bache me di cuenta de que te quería más que el primer día", mal: ["Que nos fuimos un mes a Australia", "Que dejamos de hablarnos todo el verano", "Que nos conocimos ese mismo mes"] },
-        { q: "¿A quién le confesé que cada día que pasaba me daba más cuenta de lo mucho que te amaba?", ok: "A Sandra", mal: ["A mi vecino", "Al entrenador del Atleti", "A un desconocido en el metro"] },
+        { q: "¿Qué fecha en noviembre marcó un antes y un después para dar el paso?", ok: "El miercoles 4 de noviembre", mal: ["El 31 de octubre", "El 15 de noviembre", "El 1 de diciembre"] },
+        { q: "¿Qué pasó en agosto que nos hizo darnos cuenta de lo fuerte que era lo nuestro?", ok: "Que tras un bache me di cuenta de que te quería más que el primer día", mal: ["Que nos enfadamos y nos distanciamos", "Me enfade contigo y deje de hablarte", "Que nos dimos cuenta de que nos queríamos"] },
+        { q: "¿A quién le confesé que cada día que pasaba me daba más cuenta de lo mucho que te amaba?", ok: "A Sandra", mal: ["A mi vecino", "A mi madre", "A un desconocido en el metro"] },
         { q: "¿Qué es lo que te digo sobre cómo haces cada día a mi lado?", ok: "Que lo haces mágico, único e irrepetible", mal: ["Que es un día más", "Que es bastante tranquilo", "Que pasa muy lento"] },
 
         // --- BLOQUE 2 ---
@@ -168,8 +169,8 @@ const CONTENIDO = {
         { q: "¿Qué papel ocupas en mi vida además de ser mi pareja?", ok: "Mi compañera, mi confidente y mi todo", mal: ["Mi compañera de estudios", "Mi entrenadora personal", "Mi asesora financiera"] },
 
         // --- BLOQUE 3 ---
-        { q: "¿Qué colores fueron los elegidos para diseñar todo este rincón nuestro?", ok: "Rosa y morado, tus favoritos", mal: ["Verde y amarillo", "Negro y gris", "Naranja y marrón"] },
-        { q: "¿Qué representa el 'Comodín de la Reina' que inventamos para ti?", ok: "Ganar cualquier mini-discusión tonta automáticamente", mal: ["Librarte de fregar los platos", "Elegir siempre el restaurante", "No madrugar los lunes"] },
+        { q: "¿Qué colores fueron los elegidos para diseñar todo este rincón nuestro?", ok: "Rosa y morado, nuestros favoritos", mal: ["Verde y amarillo", "Negro y gris", "Naranja y marrón"] },
+        { q: "¿Qué es lo que deseas con ganas?", ok: "Dormir juntos", mal: ["Cenar fuera", "Elegir siempre el restaurante", "No madrugar los lunes"] },
         { q: "¿Qué pasa cuando intentamos estar serios mirándonos a los ojos?", ok: "Que nos entran ganas de reírnos o besarnos", mal: ["Que aguantamos diez minutos sin pestañear", "Que nos ponemos a hablar de política", "Que nos quedamos dormidos"] },
         { q: "¿Cuál es nuestra forma favorita de resolver cualquier mini-enfado?", ok: "Con un abrazo fuerte y hablando las cosas", mal: ["Estarnos una semana sin hablar", "Echar una partida al parchís", "Hacer como que no ha pasado nada"] },
 
@@ -183,7 +184,7 @@ const CONTENIDO = {
         { q: "¿Qué canción o música es capaz de transportarme directo a ti?", ok: "Aire de Lucho RK y las canciones que nos dedicamos", mal: ["La música clásica", "El reggaeton antiguo", "La radio por las mañanas"] },
         { q: "¿Por qué somos un equipo invencible?", ok: "Porque nos complementamos en lo bueno y en lo malo", mal: ["Porque pensamos exactamente igual en todo", "Porque nunca tenemos problemas", "Porque ganamos siempre a las cartas"] },
         { q: "¿Qué es lo que más valoro de ti en mis días malos?", ok: "Tu apoyo y cómo consigues sacarme una sonrisa", mal: ["Que me dejes solo todo el día", "Que me des consejos técnicos", "Que me hagas reír con chistes malos"] },
-        { q: "¿Cómo definirías lo que sentimos el uno por el otro?", ok: "Un amor real que crece cada día más", mal: ["Un capricho pasajero", "Una amistad con derechos", "Algo normalito"] }
+        { q: "¿Cómo definirías lo que sentimos el uno por el otro?", ok: "Un amor real y sano que crece cada día más. Y nunca lo hemos tenido con nadie", mal: ["Un capricho pasajero", "Una amistad con derechos", "Algo normalito"] }
       ],
       camino: [
         { tipo: 'preguntas' },
@@ -208,19 +209,19 @@ const CONTENIDO = {
         // --- BLOQUE 1 ---
         { q: "¿Qué recuerdo guardas de nuestra 'Foto megafavorita'?", ok: "Que es la foto que más nos gusta de todas las que tenemos", mal: ["Que salió movida", "Que estábamos enfadados", "Que fue hace dos años"] },
         { q: "¿Cuál es la frase que resume cómo te ves cuando te abrazo fuerte?", ok: "Súper petit en mis bracitos", mal: ["Muy incómoda", "Con calor", "Intentando soltarte"] },
-        { q: "¿Qué ocurre cuando nos quedamos a solas y tú pones las reglas por 30 minutos?", ok: "Que yo obedezco en todo sin rechistar", mal: ["Que nos ponemos a limpiar la casa", "Que jugamos al Monopoly", "Que vemos un documental"] },
-        { q: "¿Qué es lo que más te pone nerviosa cuando me acerco mucho a ti?", ok: "Que te mire fijamente a los ojos y a los labios", mal: ["Que te cuente un chiste", "Que te hable de fútbol", "Que te pida la hora"] },
+        { q: "¿Qué ocurre cuando nos quedamos a solas y tú pones las reglas por 30 minutos?", ok: "Que yo obedezco en todo sin rechistar", mal: ["Que nos ponemos a limpiar la casa", "Que jugamos al twister", "Que vemos una peli"] },
+        { q: "¿Qué es lo que más te pone nerviosa cuando me acerco mucho a ti?", ok: "Que te mire fijamente a los ojos y a los labios", mal: ["Que te cuente un chiste", "Que te susurre al oído", "Que te pida la hora"] },
 
         // --- BLOQUE 2 ---
-        { q: "¿Qué pasa cuando te doy besos por el cuello por sorpresa?", ok: "Que te entran escalofríos y pierdes el control", mal: ["Que te da igual", "Que te vas a la cocina", "Que te pones a estudiar"] },
-        { q: "¿Cuál es nuestra regla no escrita en las tardes de sofá y manta?", ok: "Acabar acurrucados y tú dormida encima de mí", mal: ["Cada uno en una punta del sofá", "Ver tres películas seguidas sin hablar", "No taparnos con la manta"] },
+        { q: "¿Qué pasa cuando te doy besos por el cuello por sorpresa?", ok: "Que te entran escalofríos y pierdes el control", mal: ["Que te da igual", "Que te alejas de mi", "Que te pones a estudiar"] },
+        { q: "¿Cuál es nuestra regla no escrita en las tardes de sofá y manta (nos gustaria)?", ok: "Acabar acurrucados y tú dormida encima de mí", mal: ["Cada uno en una punta del sofá", "Ver tres películas seguidas sin hablar", "No taparnos con la manta"] },
         { q: "¿Qué es lo que más me gusta de cómo me miras en nuestras fotos íntimas?", ok: "Esa mirada pícara y llena de cariño", mal: ["Que siempre sales con los ojos cerrados", "Que miras a la cámara de reojo", "Que pones cara de susto"] },
         { q: "¿Qué haríamos si nos quedáramos encerrados en un ascensor los dos solos?", ok: "Aprovechar el tiempo para comernos a besos", mal: ["Llamar al técnico y esperar en silencio", "Ponernos a leer los carteles", "Sentarnos en esquinas opuestas"] },
 
         // --- BLOQUE 3 ---
         { q: "¿Qué pasa cuando me muerdes el labio o me haces bromas picantes?", ok: "Que saltan chispas entre nosotros", mal: ["Que me enfado de verdad", "Que me voy a dormir", "Que cambio de tema"] },
         { q: "¿Cuál es tu debilidad cuando te agarro de la cintura de repente?", ok: "Que te derrites al instante", mal: ["Que me apartas las manos", "Que te pones a hacer cosquillas", "Que sales corriendo"] },
-        { q: "¿Qué es lo que más nos gusta hacer cuando no tenemos prisa por ir a ningún sitio?", ok: "Quedarnos en la cama abrazados y hablando de todo", mal: ["Hacer recados por el centro", "Ordenar los armarios", "Salir a correr"] },
+        { q: "¿Qué es lo que más nos gusta hacer cuando no tenemos prisa por ir a ningún sitio?", ok: "Quedarnos en la cama abrazados y hablando de todo", mal: ["Hacer recados por el centro", "Jugar a videojuegos", "Salir a correr"] },
         { q: "¿Qué tipo de besos son los que nos dejan sin respiración?", ok: "Los besos largos, lentos y con mucha pasión", mal: ["Los besos rápidos en la mejilla", "Los besos de despedida en el portal", "Los besos esquivos"] },
 
         // --- BLOQUE 4 ---
@@ -231,7 +232,7 @@ const CONTENIDO = {
 
         // --- BLOQUE 5 ---
         { q: "¿Qué es lo que más te gusta de mis manos?", ok: "Cómo te acarician y la seguridad que te dan", mal: ["Lo frías que están siempre", "Que son muy pequeñas", "Nada en especial"] },
-        { q: "¿Cuál es nuestra mejor arma cuando queremos picarnos el uno al otro?", ok: "Las miradas cómplices y las cosquillas", mal: ["Ignorarnos todo el día", "Mandarnos stickers", "Hablar de trabajo"] },
+        { q: "¿Cuál es nuestra mejor arma cuando queremos picarnos el uno al otro?", ok: "Los susurros y los besos lentos con lengua", mal: ["Ignorarnos todo el día", "Mandarnos stickers", "Hablar de trabajo"] },
         { q: "¿Qué pasa cuando te digo 'Eres solo mía' al oído?", ok: "Que sonríes y te encanta escucharlo", mal: ["Que dices que no", "Que te pones a reír sin parar", "Que cambias de conversación"] },
         { q: "¿Por qué este nivel se llama 'Sin red'?", ok: "Porque aquí ya nos conocemos al 100% y sin filtros", mal: ["Porque no hay Wi-Fi", "Porque es el último nivel", "Porque no tiene preguntas"] }
       ],
@@ -256,13 +257,13 @@ const CONTENIDO = {
       color: "#9333ea", color2: "#f43f5e",
       preguntas: [
         // --- BLOQUE 1 ---
-        { q: "¿Quién es la persona favorita de Héctor en todo el universo?", ok: "Victoria (tú, mi Morrr)", mal: ["El delantero del Atleti", "Mi vecino del quinto", "Nadie en particular"] },
+        { q: "¿Quién es la persona favorita de Héctor en todo el universo?", ok: "Victoria (tú, mi Morrr)", mal: ["Fernando Torres", "Mi vecino del quinto", "Lucia (GTAVI)"] },
         { q: "¿Qué es lo que más deseo construir contigo de aquí en adelante?", ok: "Un futuro juntos lleno de viajes, risas y recuerdos", mal: ["Una casa en la luna", "Una colección de sellos", "Un equipo de bolos"] },
         { q: "¿Cómo me imagino despertando dentro de muchos años?", ok: "A tu lado todas las mañanas", mal: ["Solo en una isla desierta", "En un hotel de carretera", "Sin acordarme de nada"] },
         { q: "¿Qué significa este juego que he programado entero para ti?", ok: "Una forma única de demostrarte todo lo que te quiero", mal: ["Un trabajo de clase sin más", "Una prueba de informática", "Un pasatiempo aburrido"] },
 
         // --- BLOQUE 2 ---
-        { q: "¿Cuál es nuestro próximo gran viaje o escapada soñada?", ok: "Perdernos juntos en una cabaña o viajar por el mundo", mal: ["Ir al supermercado del barrio", "Una excursión con el colegio", "Quedarnos en la estación"] },
+        { q: "¿Cuál es nuestro próximo gran viaje o escapada soñada (nos gustaria)?", ok: "Perdernos juntos en una cabaña o viajar por el mundo", mal: ["Ir al supermercado del barrio", "Una excursión con el colegio", "Quedarnos en la estación"] },
         { q: "¿Qué fecha no tiene caducidad en nuestro calendario?", ok: "Nuestra historia juntos", mal: ["El ticket del súper", "La garantía del móvil", "El abono transporte"] },
         { q: "¿Qué te prometo hacer siempre, incluso en los días más complicados?", ok: "Intentarlo de la mejor manera y nunca soltarte la mano", mal: ["No volver a equivocarme nunca", "Comprarte todo lo que veas", "No enfadarme jamás"] },
         { q: "¿Cómo nos veo cuando seamos viejitos y tengamos 80 años?", ok: "Arrugados pero riéndonos exactamente igual que hoy", mal: ["Sin hablarnos", "Viviendo en países distintos", "Siendo súper serios"] },
@@ -270,12 +271,12 @@ const CONTENIDO = {
         // --- BLOQUE 3 ---
         { q: "¿Qué es lo que más te enamora de nuestra historia desde aquel día 4?", ok: "Cómo empezamos sin prisa y acabamos siendo inseparables", mal: ["Que fue todo muy rápido y sin pensar", "Que nos conocimos ayer", "Que casi no nos vemos"] },
         { q: "¿Qué pasa cuando piensas en todo lo que hemos vivido estos meses?", ok: "Que te das cuenta de que ha sido la mejor etapa", mal: ["Que se te ha hecho eterno", "Que no te acuerdas de nada", "Que cambiarías todo"] },
-        { q: "¿Cuál es el mejor regalo que me puedes hacer cada día?", ok: "Tu sonrisa, tus abrazos y seguir siendo tú misma", mal: ["Un coche deportivo", "Un reloj de oro", "Un viaje a Marte"] },
-        { q: "¿Qué siento cada vez que te veo aparecer cuando hemos quedado?", ok: "La misma ilusión y nervios que el primer día", mal: ["Nada especial", "Prisa por volver a casa", "Sueño"] },
+        { q: "¿Cuál es el mejor regalo que me puedes hacer cada día?", ok: "Tu sonrisa, tus abrazos y seguir siendo tú misma", mal: ["Un coche deportivo", "Un reloj de oro", "Un viaje a Londres"] },
+        { q: "¿Qué siento cada vez que te veo aparecer cuando hemos quedado?", ok: "La misma ilusión y nervios que el primer día", mal: ["Nada especial", "Prisa por volver a casa", "Me sale la mirada tontita"] },
 
         // --- BLOQUE 4 ---
         { q: "¿Qué es lo que nunca me cansaré de repetirte?", ok: "Que te amo con todo mi corazón y que eres preciosa", mal: ["Que llegas tarde", "Que hace frío", "Que tengo hambre"] },
-        { q: "¿Qué te espera justo al terminar este último nivel?", ok: "El regalo final y mi carta escrita desde el corazón", mal: ["Un examen de matemáticas", "Volver a empezar desde el nivel 1", "Una pantalla en negro"] },
+        { q: "¿Qué te espera justo al terminar este último nivel?", ok: "La recompensa final. (Regalito)", mal: ["Un examen de sexo", "Volver a empezar desde el nivel 1", "Una pantalla en negro"] },
         { q: "¿Por qué elegí el nombre 'El último tramo' para el Nivel 5?", ok: "Porque estás a un paso de abrir tu sorpresa final", mal: ["Porque me quedé sin ideas", "Porque es el nivel más corto", "Porque es un maratón"] },
         { q: "¿Qué harías si pudieras volver atrás al primer día que nos vimos?", ok: "Volvería a elegirte a ti mil veces más", mal: ["Me quedaría en casa", "Iría a otro parque", "No te contestaría al mensaje"] },
 
@@ -283,7 +284,7 @@ const CONTENIDO = {
         { q: "¿Cuál es nuestra mayor fortaleza como pareja?", ok: "La confianza, el cariño y las ganas de estar juntos", mal: ["Que nunca nos decimos la verdad", "Que vivimos muy lejos", "Que somos muy orgullosos"] },
         { q: "¿Qué deseo pido cada vez que pienso en nosotros?", ok: "Que sigamos sumando años, aventuras y momentos juntos", mal: ["Que me toque la lotería solo", "Que se acabe el verano", "No pido nada"] },
         { q: "¿Cuánto te quiero hoy en comparación con el primer día?", ok: "Muchísimo más, y cada día que pasa te quiero más", mal: ["Exactamente igual", "Un poquito menos", "No sabría decirlo"] },
-        { q: "¿Estás lista para abrir tu regalo final, Morrr? 💖", ok: "¡Sí, vamos a por ello!", mal: ["No, prefiero repetir el Tetris", "Mejor lo dejo para mañana", "Me da pereza"] }
+        { q: "¿Estás lista para abrir tu recompensa final, Morrr? 💖", ok: "¡Sí, vamos a por ello!", mal: ["No, prefiero repetir el Tetris", "Mejor lo dejo para mañana", "Me da pereza"] }
       ],
       camino: [
         { tipo: 'preguntas' },
