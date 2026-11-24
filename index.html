@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#fdf2f8">
+<title>Para Morr💘</title>
+<style>
+:root{--ink:#2a1b3d;--mut:#7c6f8f;--line:#eadcf5;--ok:#2e9e4f;--bad:#d92d20;--pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23ec4899' fill-opacity='.14'%3E%3Cpath d='M20 34c-9-7-14-12-14-18a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 6-5 11-14 18z'/%3E%3Cpath transform='translate(64 62) scale(.8)' d='M20 34c-9-7-14-12-14-18a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 6-5 11-14 18z'/%3E%3C/g%3E%3C/svg%3E")}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+[hidden]{display:none!important}
+html,body{margin:0;overscroll-behavior:none}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:linear-gradient(180deg,#fdf2f8,#f3ecff);background-attachment:fixed;color:var(--ink);min-height:100vh}
+body::before{content:"";position:fixed;inset:0;background:var(--pat);background-size:120px;pointer-events:none;z-index:0}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;padding:0;touch-action:manipulation}
+canvas{touch-action:none;max-width:100%}
+h1{font-size:28px;margin:8px 0}
+h2{font-size:24px;margin:8px 0}
+h3{font-size:20px;margin:0 0 6px}
+p{line-height:1.45}
+
+/* ---------- Mapa ---------- */
+#home{max-width:440px;margin:0 auto;padding-bottom:60px;position:relative;z-index:1}
+.top{position:sticky;top:0;z-index:5;background:rgba(253,244,251,.92);backdrop-filter:blur(6px);display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:700}
+.xp{color:#a21caf}
+.ban{margin:22px 16px 0;padding:14px 16px;border-radius:16px;background:var(--g,var(--c));color:#fff;box-shadow:0 6px 18px rgba(168,85,247,.25)}
+.ban small{display:block;opacity:.85;font-weight:600;letter-spacing:.5px;text-transform:uppercase;font-size:12px}
+.ban b{font-size:19px}
+.ban.lock{background:#d9cfe6;box-shadow:none}
+.path{position:relative;width:100%}
+.path svg{position:absolute;inset:0;width:100%;height:100%}
+.seg{fill:none;stroke:#e0cdf2;stroke-width:8;stroke-linecap:round;stroke-dasharray:1 15}
+.seg.on{stroke:var(--c)}
+.nd{position:absolute;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--g,var(--c));color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 0 rgba(88,28,135,.38);transition:transform .1s,box-shadow .1s}
+.nd:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(88,28,135,.38)}
+.nd.lock{background:#ece4f5;color:#a99bbd;box-shadow:0 6px 0 #d8cbe8;filter:grayscale(1);opacity:.85}
+.nd.done::before{content:"✓";position:absolute;right:-4px;top:-4px;width:24px;height:24px;border-radius:50%;background:#fff;color:var(--ok);font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--ok)}
+.nd.cur::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:4px solid var(--c);opacity:.4;animation:ring 1.6s infinite;pointer-events:none}
+@keyframes ring{0%{transform:scale(.92);opacity:.5}100%{transform:scale(1.3);opacity:0}}
+.tip{position:absolute;top:-46px;left:50%;transform:translateX(-50%);background:#fff;color:var(--c);border:2px solid var(--line);border-radius:12px;padding:5px 11px;font-size:13px;font-weight:800;letter-spacing:.6px;white-space:nowrap;animation:bob 1.2s infinite alternate}
+.tip::after{content:"";position:absolute;left:50%;bottom:-8px;width:12px;height:12px;background:#fff;border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+@keyframes bob{to{transform:translateX(-50%) translateY(-4px)}}
+.shk{animation:shake .35s}
+@keyframes shake{25%{translate:-6px 0}75%{translate:6px 0}}
+.fin{display:flex;justify-content:center;padding:34px 0 20px}
+.fin .nd{position:relative;margin:0;width:84px;height:84px;font-size:36px}
+
+/* ---------- Hoja inferior ---------- */
+#sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center}
+.sh{background:#fff;width:100%;max-width:440px;border-radius:20px 20px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));animation:up .2s}
+.sh p{margin:0 0 16px;color:var(--mut)}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+
+/* ---------- Botones ---------- */
+.btn{display:block;width:100%;padding:15px;border-radius:14px;background:var(--g,linear-gradient(135deg,#a855f7,#ec4899));color:#fff;font-weight:800;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 4px 0 rgba(88,28,135,.35);text-align:center}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.btn[disabled]{background:#e5e7eb;color:#9ca3af;box-shadow:none;transform:none}
+.btn.g{background:var(--ok)}
+.btn.r{background:var(--bad)}
+.btn.sec{background:none;color:var(--mut);box-shadow:none;margin-top:6px}
+
+/* ---------- Pantalla de juego ---------- */
+#play,#cover{position:fixed;inset:0;background:#fff8fc var(--pat);background-size:120px;display:flex;flex-direction:column;align-items:center}
+#play{z-index:30}
+#cover{z-index:35;overflow:auto}
+.ph{width:100%;max-width:520px;display:flex;align-items:center;gap:12px;padding:12px 16px}
+.x{font-size:22px;color:var(--mut);padding:6px 10px}
+.pbar{flex:1;height:14px;background:var(--line);border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--g,var(--c));border-radius:99px;transition:width .3s}
+#pm{flex:1;width:100%;max-width:520px;overflow:auto;padding:4px 16px 16px}
+#pf{width:100%;padding:14px 18px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+#pf .in{max-width:520px;margin:0 auto}
+#pf.ok{background:#d7ffb8}
+#pf.bad{background:#ffdfe0}
+.fb{font-weight:800;font-size:18px;margin-bottom:10px}
+#pf.ok .fb{color:#2e7d32}
+#pf.bad .fb{color:#c62828}
+.res{text-align:center;padding:36px 0;margin:auto}
+.res .big{font-size:72px}
+.cen{text-align:center}
+.mid{display:flex;justify-content:center}
+.gt{font-size:21px;font-weight:800;margin:8px 0 12px;line-height:1.25}
+.gs{color:var(--mut);margin:0 0 12px;font-size:14px}
+.mut{color:var(--mut);font-size:12px;font-weight:700;letter-spacing:1px}
+.hud{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin:4px 0 10px}
+.btnwrap{width:100%;max-width:340px;margin:0 auto}
+
+/* Preguntas */
+.opt{display:block;width:100%;text-align:left;padding:15px 16px;border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;margin-bottom:10px;background:#fff;font-size:16px;line-height:1.3}
+.opt.sel{border-color:var(--c);background:color-mix(in srgb,var(--c) 8%,white)}
+.opt.ok{border-color:var(--ok);background:#e9f9de}
+.opt.bad{border-color:var(--bad);background:#fde8e8}
+
+/* Pad direccional Snake */
+.pad{display:grid;grid-template-columns:repeat(3,68px);gap:8px;justify-content:center;margin-top:14px}
+.pad button{height:60px;border-radius:16px;background:#f1e8fa;font-size:24px;box-shadow:0 3px 0 #dec9f2}
+.pad button:active{background:#e2d3f2;transform:translateY(2px)}
+
+/* Joystick / Ruedita Laberinto */
+.joy-wrap{display:flex;flex-direction:column;align-items:center;margin-top:14px}
+.joy-base{position:relative;width:126px;height:126px;border-radius:50%;background:radial-gradient(circle,#f6edff 0%,#e5d1fa 100%);border:3px solid #d4b6f5;box-shadow:inset 0 3px 8px rgba(91,33,182,.15),0 4px 12px rgba(91,33,182,.12);touch-action:none;display:flex;align-items:center;justify-content:center}
+.joy-arrows{position:absolute;inset:8px;pointer-events:none;color:#9d7cc7;font-size:12px;font-weight:900}
+.joy-arrows span{position:absolute}
+.joy-arrows .u{top:2px;left:50%;transform:translateX(-50%)}
+.joy-arrows .d{bottom:2px;left:50%;transform:translateX(-50%)}
+.joy-arrows .l{left:4px;top:50%;transform:translateY(-50%)}
+.joy-arrows .r{right:4px;top:50%;transform:translateY(-50%)}
+.joy-knob{width:54px;height:54px;border-radius:50%;background:var(--g,linear-gradient(135deg,#a855f7,#ec4899));box-shadow:0 4px 10px rgba(88,28,135,.35);display:flex;align-items:center;justify-content:center;font-size:22px;transition:transform .06s ease-out;pointer-events:none}
+
+/* Tetris */
+.tt{display:flex;gap:12px;justify-content:center;align-items:flex-start}
+.tt canvas{border-radius:10px;box-shadow:0 4px 14px rgba(30,27,75,.2)}
+.side{display:flex;flex-direction:column;gap:4px;font-size:19px;min-width:74px}
+.pad5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:360px;margin:12px auto 0}
+.pad5 button{height:54px;border-radius:14px;background:#f1e8fa;font-size:22px;box-shadow:0 3px 0 #dec9f2}
+.pad5 button:active{background:#e2d3f2;transform:translateY(2px)}
+
+/* Ahorcado */
+.hm{display:flex;justify-content:center}
+.hm svg{width:140px;height:150px;stroke:#1f2328;stroke-width:3;fill:none;stroke-linecap:round}
+.pal{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0}
+.pl{width:28px;height:36px;border-bottom:3px solid var(--ink);font-size:22px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.pl.sp{border:0;width:14px}
+
+/* Teclados */
+.kb{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.k{min-width:34px;height:46px;padding:0 10px;border-radius:10px;background:#efe6f8;font-weight:700;font-size:15px}
+.k.ok{background:var(--ok);color:#fff}
+.k.med{background:#f59e0b;color:#fff}
+.k.no{background:#9ca3af;color:#fff}
+.kr{display:flex;gap:4px;justify-content:center;margin-bottom:6px}
+.kr .k{flex:1;max-width:38px;min-width:0;padding:0;height:48px}
+.kr .k.w{max-width:66px;flex:1.7;font-size:12px}
+
+/* Wordle */
+.wg{display:flex;flex-direction:column;gap:5px;margin:0 auto 10px}
+.wr{display:grid;gap:5px}
+.wc{aspect-ratio:1;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;border-radius:8px}
+.wc.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.wc.med{background:#f59e0b;border-color:#f59e0b;color:#fff}
+.wc.no{background:#6b7280;border-color:#6b7280;color:#fff}
+.wm{min-height:22px;text-align:center;color:var(--bad);font-weight:700;margin-bottom:6px}
+
+/* Memoria */
+.grid{display:grid;gap:8px}
+.mc{aspect-ratio:1;border-radius:12px;background:var(--g,var(--c));color:#fff;font-size:22px;overflow:hidden;padding:0;border:2px solid transparent}
+.mc .back,.mc .front{width:100%;height:100%;align-items:center;justify-content:center}
+.mc .back{display:flex}
+.mc .front{display:none}
+.mc img{width:100%;height:100%;object-fit:cover;display:block}
+.mc span{font-size:28px}
+.mc.on,.mc.ok{background:#fff;border-color:var(--line)}
+.mc.on .back,.mc.ok .back{display:none}
+.mc.on .front,.mc.ok .front{display:flex}
+.mc.ok{opacity:.5}
+
+/* Puzzle */
+.pz{display:grid;gap:3px;max-width:340px;margin:0 auto;aspect-ratio:1;touch-action:none}
+.t{border-radius:6px;background:var(--g,var(--c));background-repeat:no-repeat;color:#fff;font-size:28px;font-weight:800}
+.t.vacio{background:#f3e8ff}
+
+/* Laberinto */
+.maze{display:grid;margin:0 auto;max-width:400px;border-radius:10px;overflow:hidden;touch-action:none;box-shadow:0 4px 14px rgba(91,33,182,.15)}
+.c{aspect-ratio:1;display:flex;align-items:center;justify-content:center;line-height:1}
+.c.w{background:#5b21b6}
+.c.p{background:#f7f0fd}
+.c.fg{background:#111827}
+.c.me{opacity:.55}
+
+/* Sopa */
+.sg{display:grid;gap:2px;max-width:420px;margin:0 auto 12px;touch-action:none}
+.sc{aspect-ratio:1;border-radius:6px;background:#f5eefc;font-weight:800;font-size:clamp(12px,4vw,19px);padding:0}
+.sc.sel{background:#fde68a;transform:scale(1.06)}
+.sc.f{background:var(--c);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chip{padding:5px 11px;border-radius:99px;background:#f3e8ff;font-weight:700;font-size:13px}
+.chip.h{background:var(--ok);color:#fff;text-decoration:line-through}
+
+/* Simon */
+.sm{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:320px;margin:14px auto}
+.sp{aspect-ratio:1;border-radius:22px;opacity:.45;transition:opacity .1s,transform .1s}
+.sp.on{opacity:1;transform:scale(.95)}
+
+/* Final */
+.carr{width:100%;max-width:360px;aspect-ratio:1;border-radius:16px;object-fit:cover;display:block;margin:12px auto}
+.final{white-space:pre-line;font-size:17px}
+
+/* Corazones de fondo */
+.bg{position:fixed;top:-40px;z-index:0;pointer-events:none;opacity:.32;animation:flota linear infinite}
+@keyframes flota{to{transform:translateY(115vh) rotate(25deg)}}
+
+/* Confeti */
+.conf{position:fixed;top:-40px;z-index:50;pointer-events:none;animation:conf 4s linear forwards}
+@keyframes conf{to{transform:translateY(115vh)}}
+</style>
+</head>
+<body>
+<div id="home"></div>
+<div id="sheet" hidden></div>
+<div id="play" hidden></div>
+<div id="cover" hidden></div>
+
+<script src="contenido.js"></script>
+<script>
+const C = CONTENIDO;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&', '<': '<', '>': '>', '"': '"' }[c]));
+const sh = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const rnd = n => Math.floor(Math.random() * n);
+const norm = s => String(s).toUpperCase().replace(/Ñ/g, '\u0001').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\u0001/g, 'Ñ');
+
+const grad = L => `linear-gradient(135deg,${L.color},${L.color2 || '#ec4899'})`;
+const estilo = L => `--c:${L.color};--g:${grad(L)}`;
+const DEV = /[?&]dev\b/.test(location.search);
+const KEY = 'morr_v2';
+if (/[?&]reset\b/.test(location.search)) { try { localStorage.removeItem(KEY); } catch (e) {} }
+
+let fotos = [];
+let PROG = { done: [], xp: 0 };
+
+function cargar() {
+  try { const r = JSON.parse(localStorage.getItem(KEY)); if (r && Array.isArray(r.done)) PROG = r; } catch (e) {}
+  while (PROG.done.length < C.niveles.length) PROG.done.push(0);
+}
+function guardar() { try { localStorage.setItem(KEY, JSON.stringify(PROG)); } catch (e) {} }
+
+const lvlLen = l => C.niveles[l].camino.length;
+const lvlDone = l => PROG.done[l] >= lvlLen(l);
+const lvlOpen = l => DEV || l === 0 || lvlDone(l - 1);
+const todoHecho = () => C.niveles.every((_, l) => lvlDone(l));
+
+function estado(l, i) {
+  if (DEV) return i < PROG.done[l] ? 'done' : 'cur';
+  if (!lvlOpen(l)) return 'lock';
+  return i < PROG.done[l] ? 'done' : i === PROG.done[l] ? 'cur' : 'lock';
+}
+
+/* ---------- Banco de preguntas ---------- */
+function banco(l) {
+  const L = C.niveles[l];
+  const q = (L.preguntas || []).slice();
+  const need = L.camino.filter(n => n.tipo === 'preguntas').reduce((s, n) => s + (n.n || 4), 0);
+  for (let k = q.length; k < need; k++) q.push({ q: `(Pregunta de prueba ${k + 1}) Edita contenido.js`, ok: 'Respuesta correcta', mal: ['Falsa A', 'Falsa B', 'Falsa C'] });
+  return q;
+}
+function preguntasDe(l, i) {
+  const L = C.niveles[l], b = banco(l);
+  let ini = 0;
+  for (let k = 0; k < i; k++) if (L.camino[k].tipo === 'preguntas') ini += L.camino[k].n || 4;
+  return b.slice(ini, ini + (L.camino[i].n || 4));
+}
+
+/* ---------- Catálogo de juegos ---------- */
+const JUEGOS = {
+  ahorcado:  { n: 'Ahorcado', i: '🔤', f: ahorcado, d: N => 'Adivina la palabra secreta. Máximo ' + (N.fallos || 6) + ' fallos.' },
+  wordle:    { n: 'Palabra secreta', i: '🔠', f: wordle, d: N => 'Descubre la palabra en ' + (N.intentos || 6) + ' intentos.' },
+  tetris:    { n: 'Tetris', i: '🟦', f: tetris, d: N => 'Consigue ' + (N.meta || 500) + ' puntos sin llegar arriba.' },
+  snake:     { n: 'Serpiente', i: '🐍', f: snake, d: N => 'Come ' + (N.meta || 10) + ' manzanas sin chocar.' },
+  memoria:   { n: 'Memoria', i: '🃏', f: memoria, d: N => 'Encuentra las ' + (N.pares || 8) + ' parejas con un máximo de ' + (N.fallos || 10) + ' fallos.' },
+  puzzle:    { n: 'Puzzle', i: '🧩', f: puzzle, d: N => 'Recompón la imagen deslizando las piezas.' },
+  laberinto: { n: 'Laberinto', i: '🧭', f: laberinto, d: N => 'Lleva el corazón hasta la meta antes de ' + (N.tiempo || 90) + ' s.' },
+  sopa:      { n: 'Sopa de letras', i: '🔎', f: sopa, d: N => 'Encuentra todas las palabras.' },
+  simon:     { n: 'Secuencia', i: '🎵', f: simon, d: N => 'Repite la secuencia hasta la ronda ' + (N.rondas || 6) + '.' }
+};
+function infoNodo(nodo, esUltimo) {
+  let titulo, desc, icono;
+  if (nodo.tipo === 'preguntas') {
+    titulo = nodo.titulo || 'Preguntas';
+    desc = nodo.desc || (nodo.n || 4) + ' preguntas sobre nosotros. Las que falles se repiten.';
+    icono = '💬';
+  } else {
+    const J = JUEGOS[nodo.juego];
+    titulo = nodo.titulo || J.n;
+    desc = nodo.desc || J.d(nodo);
+    icono = J.i;
+  }
+  if (esUltimo) titulo += ' · Reto final';
+  return { titulo, desc, icono };
+}
+
+/* ---------- Mapa ---------- */
+function caminoHTML(l) {
+  const L = C.niveles[l], n = L.camino.length;
+  const offs = [0, 60, 90, 60, 0, -60, -90, -60];
+  const pts = L.camino.map((_, i) => ({ x: 180 + offs[i % 8], y: 60 + i * 100 }));
+  const H = 60 + (n - 1) * 100 + 60;
+  let svg = '', nodes = '';
+  for (let i = 0; i < n - 1; i++) {
+    const a = pts[i], b = pts[i + 1], m = (a.y + b.y) / 2;
+    svg += `<path class="seg ${estado(l, i) === 'done' ? 'on' : ''}" d="M${a.x} ${a.y} C${a.x} ${m} ${b.x} ${m} ${b.x} ${b.y}"/>`;
+  }
+  L.camino.forEach((nodo, i) => {
+    const st = estado(l, i);
+    const inf = infoNodo(nodo, false);
+    nodes += `<button class="nd ${st}" data-l="${l}" data-i="${i}" style="left:${(pts[i].x / 360 * 100).toFixed(2)}%;top:${(pts[i].y / H * 100).toFixed(2)}%" aria-label="${esc(inf.titulo)}">${st === 'cur' && (DEV ? i === PROG.done[l] : true) ? '<span class="tip">EMPEZAR</span>' : ''}${inf.icono}</button>`;
+  });
+  return `<div class="path" style="${estilo(L)};aspect-ratio:360/${H}"><svg viewBox="0 0 360 ${H}" preserveAspectRatio="none">${svg}</svg>${nodes}</div>`;
+}
+
+function home(centrar) {
+  const h = $('#home');
+  let html = `<div class="top"><span>${esc(C.titulo)}</span><span class="xp">★ ${PROG.xp} XP</span></div>`;
+  C.niveles.forEach((L, l) => {
+    const open = lvlOpen(l);
+    html += `<div class="ban ${open ? '' : 'lock'}" style="${estilo(L)}"><small>Nivel ${l + 1} · ${Math.min(PROG.done[l], lvlLen(l))}/${lvlLen(l)}</small><b>${esc(L.subtitulo || L.titulo)}</b></div>`;
+    html += caminoHTML(l);
+  });
+  const fin = todoHecho();
+  html += `<div class="fin" style="--c:#c026d3;--g:linear-gradient(135deg,#a855f7,#ec4899)"><button class="nd ${fin ? 'cur' : 'lock'}" id="regalo" aria-label="Regalo final">${fin ? '<span class="tip">ABRIR</span>' : ''}🎁</button></div>`;
+  h.innerHTML = html;
+  h.querySelectorAll('.nd[data-l]').forEach(b => b.onclick = () => tocar(+b.dataset.l, +b.dataset.i, b));
+  $('#regalo').onclick = e => { if (todoHecho()) final(); else { e.currentTarget.classList.add('shk'); setTimeout(() => e.currentTarget.classList.remove('shk'), 400); } };
+  if (centrar) {
+    const cur = h.querySelector('.nd.cur');
+    if (cur) cur.scrollIntoView({ block: 'center' });
+  }
+}
+
+function hoja(html, L) {
+  const s = $('#sheet');
+  s.hidden = false;
+  s.innerHTML = `<div class="sh" style="${estilo(L)}">${html}</div>`;
+  s.onclick = e => { if (e.target === s) s.hidden = true; };
+}
+
+function tocar(l, i, el) {
+  if (estado(l, i) === 'lock') {
+    el.classList.add('shk'); setTimeout(() => el.classList.remove('shk'), 400);
+    return;
+  }
+  const L = C.niveles[l], nodo = L.camino[i];
+  const inf = infoNodo(nodo, i === L.camino.length - 1);
+  hoja(`<h3>${esc(inf.titulo)}</h3><p>${esc(inf.desc)}</p><button class="btn" id="go">${i < PROG.done[l] ? 'Repetir' : 'Empezar'}</button>`, L);
+  $('#go').onclick = () => { $('#sheet').hidden = true; jugar(l, i); };
+}
+
+/* ---------- Motor de retos ---------- */
+let cierre = [];
+function limpiar() { cierre.forEach(f => { try { f(); } catch (e) {} }); cierre = []; }
+
+function jugar(l, i) {
+  const L = C.niveles[l], nodo = L.camino[i];
+  const ov = $('#play');
+  ov.hidden = false;
+  ov.style.setProperty('--c', L.color);
+  ov.style.setProperty('--g', grad(L));
+  ov.innerHTML = `<div class="ph"><button class="x" id="x" aria-label="Salir">✕</button><div class="pbar"><i id="pb"></i></div></div><div id="pm"></div><div id="pf" hidden></div>`;
+  document.body.style.overflow = 'hidden';
+  const salir = () => { limpiar(); ov.hidden = true; ov.innerHTML = ''; document.body.style.overflow = ''; };
+  const api = {
+    main: $('#pm'),
+    prog(p) { const b = $('#pb'); if (b) b.style.width = Math.max(0, Math.min(1, p)) * 100 + '%'; },
+    onClose(f) { cierre.push(f); },
+    after(fn, ms) { const t = setTimeout(fn, ms); cierre.push(() => clearTimeout(t)); },
+    footer(html, cls) { const f = $('#pf'); f.hidden = !html; f.className = cls || ''; f.innerHTML = html ? `<div class="in">${html}</div>` : ''; },
+    fin(ok, info) {
+      limpiar();
+      if (ok) {
+        api.prog(1);
+        api.main.innerHTML = `<div class="res"><div class="big">🎉</div><h2>¡Reto superado!</h2><p>${esc(info || '')}</p></div>`;
+        api.footer('<button class="btn g" id="c">Continuar</button>');
+        $('#c').onclick = () => { salir(); completar(l, i); };
+      } else {
+        api.main.innerHTML = `<div class="res"><div class="big">😅</div><h2>Casi</h2><p>${esc(info || 'Inténtalo otra vez.')}</p></div>`;
+        api.footer('<button class="btn" id="r">Reintentar</button><button class="btn sec" id="s">Salir</button>');
+        $('#r').onclick = arrancar;
+        $('#s').onclick = salir;
+      }
+    }
+  };
+  const arrancar = () => {
+    limpiar();
+    api.main.innerHTML = '';
+    api.footer('');
+    api.prog(0);
+    if (nodo.tipo === 'preguntas') preguntas(api, preguntasDe(l, i));
+    else JUEGOS[nodo.juego].f(api.main, nodo, api);
+  };
+  $('#x').onclick = () => { if (confirm('¿Salir del reto? Se pierde el avance de este reto.')) salir(); };
+  arrancar();
+}
+
+function completar(l, i) {
+  const antes = lvlDone(l);
+  if (i === PROG.done[l]) {
+    PROG.done[l]++;
+    PROG.xp += C.niveles[l].camino[i].tipo === 'preguntas' ? 10 : 15;
+    guardar();
+  }
+  if (!antes && lvlDone(l)) nivelCompleto(l); else home(true);
+}
+
+/* ---------- Pantallas completas ---------- */
+let intervaloCover = null;
+function cubrir(html, L) {
+  const c = $('#cover');
+  c.hidden = false;
+  c.style.setProperty('--c', L.color);
+  c.style.setProperty('--g', grad(L));
+  c.innerHTML = html;
+  document.body.style.overflow = 'hidden';
+}
+function cerrarCover() {
+  clearInterval(intervaloCover);
+  $('#cover').hidden = true;
+  $('#cover').innerHTML = '';
+  document.body.style.overflow = '';
+}
+function lluvia() {
+  for (let i = 0; i < 36; i++) {
+    const s = document.createElement('span');
+    s.className = 'conf';
+    s.textContent = ['💖', '💜', '🩷', '🎉'][i % 4];
+    s.style.left = Math.random() * 100 + '%';
+    s.style.fontSize = (18 + Math.random() * 22) + 'px';
+    s.style.animationDelay = (Math.random() * 2) + 's';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 7000);
+  }
+}
+function nivelCompleto(l) {
+  const ult = l === C.niveles.length - 1;
+  const sig = !ult ? C.niveles[l + 1] : null;
+  cubrir(`<div class="res"><div class="big">🏆</div><h1>Nivel ${l + 1} completado</h1><p>${ult ? 'Has terminado todos los niveles. Queda una última cosa.' : 'Siguiente: ' + esc(sig.subtitulo || sig.titulo)}</p><div class="btnwrap"><button class="btn" id="c">${ult ? 'Abrir regalo' : 'Seguir'}</button></div></div>`, C.niveles[l]);
+  lluvia();
+  $('#c').onclick = () => { cerrarCover(); if (ult) final(); else home(true); };
+}
+function final() {
+  const F = C.final;
+  cubrir(`<div class="res" style="max-width:420px;padding:24px"><h1>${esc(F.saludo)}</h1>${fotos.length ? `<img id="carr" class="carr" src="${fotos[0]}" alt="">` : '<div class="big">💖</div>'}${F.parrafos.map(p => `<p class="final">${esc(p)}</p>`).join('')}<p class="final"><b>${esc(F.despedida)}</b></p><p class="final">${esc(F.firma)}</p><div class="btnwrap"><button class="btn" id="c">Volver al camino</button></div></div>`, C.niveles[C.niveles.length - 1]);
+  let k = 0;
+  if (fotos.length > 1) intervaloCover = setInterval(() => { k = (k + 1) % fotos.length; const im = $('#carr'); if (im) im.src = fotos[k]; }, 3000);
+  lluvia();
+  $('#c').onclick = () => { cerrarCover(); home(true); };
+}
+
+/* ---------- Ayudas comunes ---------- */
+const padHTML = () => '<div class="pad"><span></span><button data-d="U">▲</button><span></span><button data-d="L">◀</button><button data-d="D">▼</button><button data-d="R">▶</button></div>';
+const ligarPad = (box, fn) => box.querySelectorAll('.pad button').forEach(b => b.onclick = () => fn(b.dataset.d));
+function flechas(api, fn) {
+  const kd = e => {
+    const m = { ArrowUp: 'U', ArrowDown: 'D', ArrowLeft: 'L', ArrowRight: 'R', w: 'U', s: 'D', a: 'L', d: 'R' }[e.key];
+    if (m) { e.preventDefault(); fn(m); }
+  };
+  document.addEventListener('keydown', kd);
+  api.onClose(() => document.removeEventListener('keydown', kd));
+}
+function deslizar(el, fn) {
+  let sx = 0, sy = 0;
+  el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  el.addEventListener('touchend', e => {
+    const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 18) return;
+    fn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'R' : 'L') : (dy > 0 ? 'D' : 'U'));
+  });
+}
+
+/* Joystick virtual tipo ruedita para móvil */
+function crearJoystick(box, fn) {
+  const wrap = box.querySelector('.joy-base');
+  const knob = box.querySelector('.joy-knob');
+  if (!wrap || !knob) return;
+  let active = false, lastDir = null, repTimer = null;
+  const maxR = 34;
+
+  const stopRep = () => { clearInterval(repTimer); repTimer = null; lastDir = null; };
+  const update = (cx, cy) => {
+    const rect = wrap.getBoundingClientRect();
+    const ox = rect.left + rect.width / 2;
+    const oy = rect.top + rect.height / 2;
+    let dx = cx - ox, dy = cy - oy;
+    const dist = Math.hypot(dx, dy);
+    if (dist > maxR) { dx = dx / dist * maxR; dy = dy / dist * maxR; }
+    knob.style.transform = `translate(${dx}px, ${dy}px)`;
+    if (dist < 12) { stopRep(); return; }
+    const dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'R' : 'L') : (dy > 0 ? 'D' : 'U');
+    if (dir !== lastDir) {
+      stopRep();
+      lastDir = dir;
+      fn(dir);
+      repTimer = setInterval(() => fn(dir), 145);
+    }
+  };
+
+  const reset = () => { active = false; stopRep(); knob.style.transform = 'translate(0,0)'; };
+  wrap.addEventListener('touchstart', e => { e.preventDefault(); active = true; update(e.touches[0].clientX, e.touches[0].clientY); }, { passive: false });
+  wrap.addEventListener('touchmove', e => { if (!active) return; e.preventDefault(); update(e.touches[0].clientX, e.touches[0].clientY); }, { passive: false });
+  wrap.addEventListener('touchend', reset);
+  wrap.addEventListener('touchcancel', reset);
+  wrap.addEventListener('mousedown', e => { active = true; update(e.clientX, e.clientY); });
+  window.addEventListener('mousemove', e => { if (active) update(e.clientX, e.clientY); });
+  window.addEventListener('mouseup', () => { if (active) reset(); });
+  return stopRep;
+}
+
+let AC;
+function tono(f) {
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.frequency.value = f; o.connect(g); g.connect(AC.destination); g.gain.value = 0.15;
+    o.start(); o.stop(AC.currentTime + 0.25);
+  } catch (e) {}
+}
+
+/* =====================================================================
+   RETO: PREGUNTAS (estilo Duolingo: las falladas vuelven al final)
+   ===================================================================== */
+function preguntas(api, qs) {
+  const total = qs.length;
+  const cola = qs.slice();
+  let hechas = 0, fallos = 0;
+  const sig = () => {
+    if (!cola.length) { api.fin(true, fallos ? `Fallos: ${fallos}` : 'Sin ningún fallo.'); return; }
+    const q = cola[0];
+    const ops = sh([{ t: q.ok, ok: true }, ...q.mal.map(t => ({ t, ok: false }))]);
+    let sel = -1, comprobado = false;
+    api.main.innerHTML = `<div class="gt">${esc(q.q)}</div>${ops.map((o, k) => `<button class="opt" data-k="${k}">${esc(o.t)}</button>`).join('')}`;
+    api.footer('<button class="btn" id="chk" disabled>Comprobar</button>');
+    const btns = [...api.main.querySelectorAll('.opt')];
+    btns.forEach(b => b.onclick = () => {
+      if (comprobado) return;
+      sel = +b.dataset.k;
+      btns.forEach(x => x.classList.toggle('sel', x === b));
+      $('#chk').disabled = false;
+    });
+    $('#chk').onclick = () => {
+      if (sel < 0 || comprobado) return;
+      comprobado = true;
+      const bien = ops[sel].ok;
+      btns.forEach((b, k) => { b.classList.remove('sel'); if (ops[k].ok) b.classList.add('ok'); else if (k === sel) b.classList.add('bad'); });
+      if (bien) {
+        cola.shift(); hechas++; api.prog(hechas / total);
+        api.footer('<div class="fb">✔ Correcto</div><button class="btn g" id="n">Continuar</button>', 'ok');
+      } else {
+        fallos++; cola.push(cola.shift());
+        api.footer('<div class="fb">✘ Esa no era. La repetiremos.</div><button class="btn r" id="n">Continuar</button>', 'bad');
+      }
+      $('#n').onclick = sig;
+    };
+  };
+  sig();
+}
+
+/* =====================================================================
+   TETRIS (Con pieza fantasma guía + gestos táctiles)
+   ===================================================================== */
+function tetris(box, N, api) {
+  const COLS = 10, ROWS = 20, meta = N.meta || 500, vel0 = N.vel || 700;
+  const cell = Math.max(14, Math.min(28, Math.floor((innerHeight - 230) / ROWS), Math.floor((Math.min(innerWidth, 520) - 36 - 95) / COLS)));
+  box.innerHTML = `<div class="tt"><canvas id="tc" width="${COLS * cell}" height="${ROWS * cell}"></canvas><div class="side"><span class="mut">SIGUIENTE</span><canvas id="tn" width="72" height="72"></canvas><span class="mut">PUNTOS</span><b id="ts">0</b><span class="mut">META</span><b>${meta}</b><span class="mut">LÍNEAS</span><b id="tl">0</b></div></div><div class="pad5"><button data-a="L">◀</button><button data-a="R">▶</button><button data-a="T">⟳</button><button data-a="D">▼</button><button data-a="H">⤓</button></div>`;
+  const F = [[[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[0, 1, 1], [1, 1, 0]], [[1, 1, 0], [0, 1, 1]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]]];
+  const COL = ['#06b6d4', '#eab308', '#a855f7', '#22c55e', '#ef4444', '#3b82f6', '#f97316'];
+  const tab = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+  let bolsa = [];
+  const sacar = () => { if (!bolsa.length) bolsa = sh([0, 1, 2, 3, 4, 5, 6]); return bolsa.pop(); };
+  let sig = sacar(), pz = null, pts = 0, lin = 0, vivo = true, timer = null;
+  const cv = $('#tc'), cx = cv.getContext('2d'), nx = $('#tn').getContext('2d');
+  const choca = (m, x, y) => m.some((r, j) => r.some((v, i) => v && (x + i < 0 || x + i >= COLS || y + j >= ROWS || (y + j >= 0 && tab[y + j][x + i]))));
+  const rot = m => m[0].map((_, i) => m.map(r => r[i]).reverse());
+  const blk = (g, c, i, j, k) => { g.fillStyle = COL[c - 1]; g.fillRect(i * k + 1, j * k + 1, k - 2, k - 2); };
+
+  const dib = () => {
+    cx.fillStyle = '#1e1b4b'; cx.fillRect(0, 0, cv.width, cv.height);
+    // Cuadrícula sutil para ayudar a alinear en móvil
+    cx.strokeStyle = 'rgba(255,255,255,0.05)';
+    cx.lineWidth = 1;
+    for (let i = 1; i < COLS; i++) { cx.beginPath(); cx.moveTo(i * cell, 0); cx.lineTo(i * cell, cv.height); cx.stroke(); }
+
+    for (let j = 0; j < ROWS; j++) for (let i = 0; i < COLS; i++) if (tab[j][i]) blk(cx, tab[j][i], i, j, cell);
+
+    if (pz) {
+      // Calcular dónde caería la pieza (Ghost piece)
+      let gy = pz.y;
+      while (!choca(pz.m, pz.x, gy + 1)) gy++;
+
+      // Dibujar guía vertical y silueta de aterrizaje
+      pz.m.forEach((r, j) => r.forEach((v, i) => {
+        if (v) {
+          const px = (pz.x + i) * cell;
+          const py = (gy + j) * cell;
+          cx.fillStyle = 'rgba(255, 255, 255, 0.14)';
+          cx.fillRect(px + 1, py + 1, cell - 2, cell - 2);
+          cx.strokeStyle = COL[pz.c - 1];
+          cx.lineWidth = 1.5;
+          cx.strokeRect(px + 1.5, py + 1.5, cell - 3, cell - 3);
+        }
+      }));
+
+      // Dibujar pieza activa
+      pz.m.forEach((r, j) => r.forEach((v, i) => { if (v) blk(cx, pz.c, pz.x + i, pz.y + j, cell); }));
+    }
+
+    nx.fillStyle = '#1e1b4b'; nx.fillRect(0, 0, 72, 72);
+    const m = F[sig], k = 16, ox = (72 - m[0].length * k) / 2, oy = (72 - m.length * k) / 2;
+    m.forEach((r, j) => r.forEach((v, i) => { if (v) { nx.fillStyle = COL[sig]; nx.fillRect(ox + i * k + 1, oy + j * k + 1, k - 2, k - 2); } }));
+  };
+
+  const upd = () => { $('#ts').textContent = pts; $('#tl').textContent = lin; };
+  const fin = ok => {
+    if (!vivo) return;
+    vivo = false; clearTimeout(timer);
+    api.after(() => api.fin(ok, ok ? `Has llegado a ${pts} puntos.` : `Te has quedado en ${pts} de ${meta} puntos.`), 400);
+  };
+  const nueva = () => {
+    const k = sig; sig = sacar();
+    const m = F[k].map(r => r.slice());
+    pz = { m, x: Math.floor((COLS - m[0].length) / 2), y: 0, c: k + 1 };
+    if (choca(pz.m, pz.x, pz.y)) fin(false);
+  };
+  const fijar = () => {
+    pz.m.forEach((r, j) => r.forEach((v, i) => { if (v) tab[pz.y + j][pz.x + i] = pz.c; }));
+    let n = 0;
+    for (let j = ROWS - 1; j >= 0;) {
+      if (tab[j].every(v => v)) { tab.splice(j, 1); tab.unshift(Array(COLS).fill(0)); n++; } else j--;
+    }
+    if (n) { lin += n; pts += [0, 100, 300, 500, 800][n]; }
+    api.prog(pts / meta); upd();
+    if (pts >= meta) { fin(true); return; }
+    nueva();
+  };
+  const bajar = () => { if (!choca(pz.m, pz.x, pz.y + 1)) pz.y++; else fijar(); };
+  const acc = a => {
+    if (!vivo) return;
+    if (a === 'L') { if (!choca(pz.m, pz.x - 1, pz.y)) pz.x--; }
+    else if (a === 'R') { if (!choca(pz.m, pz.x + 1, pz.y)) pz.x++; }
+    else if (a === 'D') bajar();
+    else if (a === 'T') { const r = rot(pz.m); for (const d of [0, -1, 1, -2, 2]) if (!choca(r, pz.x + d, pz.y)) { pz.m = r; pz.x += d; break; } }
+    else if (a === 'H') { while (!choca(pz.m, pz.x, pz.y + 1)) pz.y++; fijar(); }
+    if (vivo) dib();
+  };
+  const vel = () => Math.max(100, vel0 - lin * 25);
+  const loop = () => { if (!vivo) return; bajar(); if (vivo) { dib(); timer = setTimeout(loop, vel()); } };
+  box.querySelectorAll('.pad5 button').forEach(b => b.onclick = () => acc(b.dataset.a));
+
+  // Gestos táctiles directos sobre el tablero de Tetris
+  let tx = 0, ty = 0, movedX = false;
+  cv.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; movedX = false; }, { passive: true });
+  cv.addEventListener('touchmove', e => {
+    if (!vivo) return;
+    const dx = e.touches[0].clientX - tx;
+    if (Math.abs(dx) >= cell) {
+      acc(dx > 0 ? 'R' : 'L');
+      tx = e.touches[0].clientX;
+      movedX = true;
+    }
+  }, { passive: true });
+  cv.addEventListener('touchend', e => {
+    if (!vivo) return;
+    const dy = e.changedTouches[0].clientY - ty;
+    const dx = e.changedTouches[0].clientX - tx;
+    if (dy > 45 && Math.abs(dy) > Math.abs(dx)) acc('H');
+    else if (!movedX && Math.abs(dx) < 12 && Math.abs(dy) < 12) acc('T');
+  });
+
+  const kd = e => {
+    const m = { ArrowLeft: 'L', ArrowRight: 'R', ArrowUp: 'T', ArrowDown: 'D', ' ': 'H' }[e.key];
+    if (m) { e.preventDefault(); acc(m); }
+  };
+  document.addEventListener('keydown', kd);
+  api.onClose(() => { document.removeEventListener('keydown', kd); vivo = false; clearTimeout(timer); });
+  nueva(); dib(); timer = setTimeout(loop, vel());
+}
+
+/* =====================================================================
+   AHORCADO
+   ===================================================================== */
+function ahorcado(box, N, api) {
+  const pal = String(N.palabra || 'MORR'), clave = [...pal].map(norm), max = N.fallos || 6;
+  const usadas = new Set(), letras = [...'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'];
+  let fallos = 0, vivo = true;
+  const esLetra = c => /^[A-ZÑ]$/.test(c);
+  box.innerHTML = `<div class="gt">Ahorcado</div><p class="gs">${esc(N.pista || 'Adivina la palabra secreta.')}</p>
+  <div class="hm"><svg viewBox="0 0 120 130"><line x1="10" y1="125" x2="110" y2="125"/><line x1="30" y1="125" x2="30" y2="10"/><line x1="30" y1="10" x2="85" y2="10"/><line x1="85" y1="10" x2="85" y2="28"/>
+  <circle id="p0" cx="85" cy="38" r="10"/><line id="p1" x1="85" y1="48" x2="85" y2="85"/><line id="p2" x1="85" y1="58" x2="68" y2="75"/><line id="p3" x1="85" y1="58" x2="102" y2="75"/><line id="p4" x1="85" y1="85" x2="70" y2="110"/><line id="p5" x1="85" y1="85" x2="100" y2="110"/></svg></div>
+  <div class="pal" id="pal"></div><div class="cen mut" style="margin-bottom:10px">FALLOS: <b id="hf">0</b>/${max}</div>
+  <div class="kb" id="kb">${letras.map(l => `<button class="k" data-l="${l}">${l}</button>`).join('')}</div>`;
+  const pinta = () => {
+    $('#pal').innerHTML = [...pal].map((c, i) => !esLetra(clave[i]) ? `<span class="pl sp">${c === ' ' ? '' : esc(c)}</span>` : `<span class="pl">${usadas.has(clave[i]) ? esc(c.toUpperCase()) : ''}</span>`).join('');
+    const partes = Math.ceil(fallos / max * 6);
+    for (let k = 0; k < 6; k++) $('#p' + k).style.display = k < partes ? '' : 'none';
+    $('#hf').textContent = fallos;
+  };
+  const tecla = L => {
+    if (!vivo || usadas.has(L)) return;
+    usadas.add(L);
+    const b = box.querySelector(`.k[data-l="${L}"]`);
+    const acierto = clave.includes(L);
+    if (b) b.classList.add(acierto ? 'ok' : 'no');
+    if (!acierto) fallos++;
+    pinta();
+    const completa = clave.every(c => !esLetra(c) || usadas.has(c));
+    const hechos = clave.filter(c => esLetra(c) && usadas.has(c)).length, tot = clave.filter(esLetra).length;
+    api.prog(hechos / tot);
+    if (completa) { vivo = false; api.after(() => api.fin(true, 'La palabra era: ' + pal), 600); }
+    else if (fallos >= max) { vivo = false; api.after(() => api.fin(false, 'Te has quedado sin intentos.'), 600); }
+  };
+  box.querySelectorAll('.k').forEach(b => b.onclick = () => tecla(b.dataset.l));
+  const kd = e => { if (e.key.length === 1) { const L = norm(e.key); if (letras.includes(L)) tecla(L); } };
+  document.addEventListener('keydown', kd);
+  api.onClose(() => { document.removeEventListener('keydown', kd); vivo = false; });
+  pinta();
+}
+
+/* =====================================================================
+   PALABRA SECRETA (estilo Wordle)
+   ===================================================================== */
+function wordle(box, N, api) {
+  const pal = norm(N.palabra || 'MORR').replace(/[^A-ZÑ]/g, ''), L = pal.length, max = N.intentos || 6;
+  let fila = 0, cur = '', vivo = true;
+  const est = {}, rango = { no: 1, med: 2, ok: 3 };
+  const filas = ['QWERTYUIOP', 'ASDFGHJKLÑ', 'ZXCVBNM'];
+  box.innerHTML = `<div class="gt">Palabra secreta</div><p class="gs">${esc(N.pista || 'Adivina la palabra.')} (${L} letras)</p>
+  <div class="wg" style="max-width:${Math.min(58 * L, 360)}px">${Array.from({ length: max }, (_, r) => `<div class="wr" style="grid-template-columns:repeat(${L},1fr)">${Array.from({ length: L }, (_, c) => `<div class="wc" id="w${r}_${c}"></div>`).join('')}</div>`).join('')}</div>
+  <div class="wm" id="wm"></div>
+  ${filas.map((f, n) => `<div class="kr">${n === 2 ? '<button class="k w" data-k="ENTER">ENVIAR</button>' : ''}${[...f].map(l => `<button class="k" data-k="${l}">${l}</button>`).join('')}${n === 2 ? '<button class="k w" data-k="BACK">⌫</button>' : ''}</div>`).join('')}`;
+  const pinta = () => { for (let c = 0; c < L; c++) $(`#w${fila}_${c}`).textContent = cur[c] || ''; };
+  const evalua = g => {
+    const r = Array(L).fill('no'), resto = {};
+    for (let i = 0; i < L; i++) { if (g[i] === pal[i]) r[i] = 'ok'; else resto[pal[i]] = (resto[pal[i]] || 0) + 1; }
+    for (let i = 0; i < L; i++) if (r[i] !== 'ok' && resto[g[i]] > 0) { r[i] = 'med'; resto[g[i]]--; }
+    return r;
+  };
+  const msg = t => { $('#wm').textContent = t; };
+  const enviar = () => {
+    if (cur.length < L) { msg('Faltan letras'); return; }
+    const r = evalua(cur);
+    for (let c = 0; c < L; c++) {
+      $(`#w${fila}_${c}`).classList.add(r[c]);
+      const l = cur[c];
+      if (!est[l] || rango[r[c]] > rango[est[l]]) est[l] = r[c];
+      const k = box.querySelector(`.k[data-k="${l}"]`);
+      if (k) { k.classList.remove('ok', 'med', 'no'); k.classList.add(est[l]); }
+    }
+    if (cur === pal) { vivo = false; api.prog(1); api.after(() => api.fin(true, 'Palabra: ' + pal), 700); return; }
+    fila++; cur = ''; api.prog(fila / max);
+    if (fila >= max) { vivo = false; api.after(() => api.fin(false, 'Se acabaron los intentos.'), 700); }
+  };
+  const tecla = k => {
+    if (!vivo) return;
+    msg('');
+    if (k === 'BACK') cur = cur.slice(0, -1);
+    else if (k === 'ENTER') { enviar(); return; }
+    else if (cur.length < L) cur += k;
+    pinta();
+  };
+  box.querySelectorAll('.k').forEach(b => b.onclick = () => tecla(b.dataset.k));
+  const kd = e => {
+    if (e.key === 'Enter') tecla('ENTER');
+    else if (e.key === 'Backspace') tecla('BACK');
+    else if (e.key.length === 1) { const l = norm(e.key); if (/^[A-ZÑ]$/.test(l)) tecla(l); }
+  };
+  document.addEventListener('keydown', kd);
+  api.onClose(() => { document.removeEventListener('keydown', kd); vivo = false; });
+}
+
+/* =====================================================================
+   SERPIENTE
+   ===================================================================== */
+function snake(box, N, api) {
+  const G = N.tam || 15, meta = N.meta || 10, cy = Math.floor(G / 2);
+  const cell = Math.max(14, Math.floor(Math.min(Math.min(innerWidth, 520) - 36, innerHeight - 310, 400) / G));
+  box.innerHTML = `<div class="hud"><span>🍎 <b id="sp">0</b>/${meta}</span><span class="mut" id="sm">Desliza o usa los botones</span></div><div class="mid"><canvas id="sc" width="${G * cell}" height="${G * cell}"></canvas></div>${padHTML()}`;
+  const cv = $('#sc'), cx = cv.getContext('2d');
+  let cuerpo = [{ x: 4, y: cy }, { x: 3, y: cy }, { x: 2, y: cy }], dir = { x: 1, y: 0 }, nd = dir, pts = 0, vivo = true, ini = false, timer = null, comida = null;
+  const muros = new Set();
+  for (let t = 0; muros.size < (N.muros || 0) && t < 500; t++) {
+    const x = rnd(G), y = rnd(G);
+    if (Math.abs(y - cy) <= 1 && x <= 8) continue;
+    muros.add(x + ',' + y);
+  }
+  const poner = () => { do { comida = { x: rnd(G), y: rnd(G) }; } while (muros.has(comida.x + ',' + comida.y) || cuerpo.some(s => s.x === comida.x && s.y === comida.y)); };
+  const dib = () => {
+    cx.fillStyle = '#f7f0fd'; cx.fillRect(0, 0, cv.width, cv.height);
+    cx.fillStyle = '#5b21b6';
+    muros.forEach(m => { const [x, y] = m.split(',').map(Number); cx.fillRect(x * cell, y * cell, cell, cell); });
+    cx.fillStyle = '#d92d20'; cx.beginPath(); cx.arc((comida.x + .5) * cell, (comida.y + .5) * cell, cell * .38, 0, 7); cx.fill();
+    cuerpo.forEach((s, i) => { cx.fillStyle = i === 0 ? '#6b21a8' : '#c084fc'; cx.fillRect(s.x * cell + 1, s.y * cell + 1, cell - 2, cell - 2); });
+  };
+  const fin = ok => {
+    if (!vivo) return;
+    vivo = false; clearTimeout(timer);
+    api.after(() => api.fin(ok, ok ? `Has comido ${pts} manzanas.` : `Has comido ${pts} de ${meta}.`), 400);
+  };
+  const tick = () => {
+    if (!vivo) return;
+    dir = nd;
+    const h = { x: cuerpo[0].x + dir.x, y: cuerpo[0].y + dir.y };
+    const come = h.x === comida.x && h.y === comida.y;
+    const choque = (come ? cuerpo : cuerpo.slice(0, -1)).some(s => s.x === h.x && s.y === h.y);
+    if (h.x < 0 || h.y < 0 || h.x >= G || h.y >= G || muros.has(h.x + ',' + h.y) || choque) { fin(false); return; }
+    cuerpo.unshift(h);
+    if (come) {
+      pts++; $('#sp').textContent = pts; api.prog(pts / meta);
+      if (pts >= meta) { dib(); fin(true); return; }
+      poner();
+    } else cuerpo.pop();
+    dib();
+    timer = setTimeout(tick, Math.max(70, (N.vel || 150) - pts * 4));
+  };
+  const mover = d => {
+    const v = { U: { x: 0, y: -1 }, D: { x: 0, y: 1 }, L: { x: -1, y: 0 }, R: { x: 1, y: 0 } }[d];
+    if (!v || !vivo) return;
+    if (v.x === -dir.x && v.y === -dir.y) return;
+    nd = v;
+    if (!ini) { ini = true; $('#sm').textContent = ''; timer = setTimeout(tick, 250); }
+  };
+  ligarPad(box, mover); flechas(api, mover); deslizar(cv, mover);
+  api.onClose(() => { vivo = false; clearTimeout(timer); });
+  poner(); dib();
+}
+
+/* =====================================================================
+   MEMORIA
+   ===================================================================== */
+function memoria(box, N, api) {
+  const pares = N.pares || 8, max = N.fallos || 10;
+  const emo = ['💖', '🐧', '⚽', '🎵', '🌳', '👕', '🌙', '☕', '🎬', '✈️', '🍕', '📷'];
+  const cart = Array.from({ length: pares }, (_, i) => fotos[i] ? `<img src="${fotos[i]}" alt="">` : `<span>${emo[i % emo.length]}</span>`);
+  const mazo = sh([...Array(pares).keys(), ...Array(pares).keys()]);
+  const cols = { 6: 4, 8: 4, 10: 5, 12: 6 }[pares] || 4;
+  box.innerHTML = `<div class="hud"><span>Parejas: <b id="np">0</b>/${pares}</span><span>Fallos: <b id="nf">0</b>/${max}</span></div><div class="grid" style="grid-template-columns:repeat(${cols},1fr)">${mazo.map(id => `<button class="mc" data-id="${id}"><div class="back">?</div><div class="front">${cart[id]}</div></button>`).join('')}</div>`;
+  let a = null, bloqueo = false, n = 0, f = 0;
+  box.querySelectorAll('.mc').forEach(b => b.onclick = () => {
+    if (bloqueo || b.classList.contains('on') || b.classList.contains('ok')) return;
+    b.classList.add('on');
+    if (!a) { a = b; return; }
+    if (a.dataset.id === b.dataset.id) {
+      a.classList.replace('on', 'ok'); b.classList.replace('on', 'ok');
+      a = null; n++; $('#np').textContent = n; api.prog(n / pares);
+      if (n === pares) { bloqueo = true; api.after(() => api.fin(true, `Con ${f} fallos.`), 600); }
+    } else {
+      f++; $('#nf').textContent = f;
+      bloqueo = true;
+      const p = a; a = null;
+      api.after(() => {
+        p.classList.remove('on'); b.classList.remove('on');
+        if (f >= max) api.fin(false, 'Demasiados fallos.'); else bloqueo = false;
+      }, 800);
+    }
+  });
+}
+
+/* =====================================================================
+   PUZZLE DESLIZANTE (Toque y deslizamiento en móvil)
+   ===================================================================== */
+function puzzle(box, N, api) {
+  const T = N.tam || 3, foto = fotos.length ? fotos[(N.foto || 0) % fotos.length] : null, tot = T * T, maxMov = N.movimientos || 0;
+  const orden = [...Array(tot).keys()];
+  let vac = tot - 1, vivo = true, mov = 0;
+  for (let k = 0, prev = -1; k < tot * 40; k++) {
+    const r = Math.floor(vac / T), c = vac % T, v = [];
+    if (r > 0) v.push(vac - T);
+    if (r < T - 1) v.push(vac + T);
+    if (c > 0) v.push(vac - 1);
+    if (c < T - 1) v.push(vac + 1);
+    const cand = v.filter(x => x !== prev), j = (cand.length ? cand : v)[rnd((cand.length ? cand : v).length)];
+    [orden[vac], orden[j]] = [orden[j], orden[vac]]; prev = vac; vac = j;
+  }
+  if (orden.every((f, i) => f === i)) { [orden[tot - 1], orden[tot - 2]] = [orden[tot - 2], orden[tot - 1]]; vac = tot - 2; }
+  box.innerHTML = `<div class="hud"><span>Movimientos: <b id="mv">0</b>${maxMov ? '/' + maxMov : ''}</span><span class="mut">${foto ? 'ORDENA LA FOTO' : 'ORDENA LOS NÚMEROS'}</span></div><div class="pz" id="pz" style="grid-template-columns:repeat(${T},1fr)"></div>`;
+  const dib = () => {
+    $('#pz').innerHTML = orden.map((f, i) => {
+      if (f === tot - 1) return '<button class="t vacio" disabled></button>';
+      const st = foto ? `background-image:url('${foto}');background-size:${T * 100}% ${T * 100}%;background-position:${(f % T) / (T - 1) * 100}% ${Math.floor(f / T) / (T - 1) * 100}%` : '';
+      return `<button class="t" data-i="${i}" style="${st}">${foto ? '' : f + 1}</button>`;
+    }).join('');
+    $('#pz').querySelectorAll('.t[data-i]').forEach(b => b.onclick = () => mover(+b.dataset.i));
+  };
+  const mover = i => {
+    if (!vivo || i < 0 || i >= tot) return;
+    const dist = Math.abs(Math.floor(i / T) - Math.floor(vac / T)) + Math.abs(i % T - vac % T);
+    if (dist !== 1) return;
+    [orden[vac], orden[i]] = [orden[i], orden[vac]]; vac = i; mov++;
+    $('#mv').textContent = mov;
+    dib();
+    if (orden.every((f, k) => f === k)) { vivo = false; api.after(() => api.fin(true, `Resuelto en ${mov} movimientos.`), 600); }
+    else if (maxMov && mov >= maxMov) { vivo = false; api.after(() => api.fin(false, 'Te has quedado sin movimientos.'), 400); }
+  };
+  deslizar($('#pz'), d => {
+    const r = Math.floor(vac / T), c = vac % T;
+    if (d === 'U' && r < T - 1) mover(vac + T);
+    else if (d === 'D' && r > 0) mover(vac - T);
+    else if (d === 'L' && c < T - 1) mover(vac + 1);
+    else if (d === 'R' && c > 0) mover(vac - 1);
+  });
+  api.onClose(() => { vivo = false; });
+  dib();
+}
+
+/* =====================================================================
+   LABERINTO (Con joystick virtual ruedita + corazón 💘)
+   ===================================================================== */
+function laberinto(box, N, api) {
+  let W = N.tam || 15; if (W % 2 === 0) W++;
+  const tiempo = N.tiempo || 90, niebla = N.niebla || 0;
+  const M = Array.from({ length: W }, () => Array(W).fill(1));
+  const tallar = (x, y) => {
+    M[y][x] = 0;
+    for (const [dx, dy] of sh([[2, 0], [-2, 0], [0, 2], [0, -2]])) {
+      const nx = x + dx, ny = y + dy;
+      if (nx > 0 && ny > 0 && nx < W - 1 && ny < W - 1 && M[ny][nx] === 1) { M[y + dy / 2][x + dx / 2] = 0; tallar(nx, ny); }
+    }
+  };
+  tallar(1, 1);
+  let px = 1, py = 1, vivo = true, t = tiempo;
+  const fx = W - 2, fy = W - 2, vis = new Set(['1,1']);
+  const fs = Math.floor(Math.min(innerWidth - 36, 400) / W * 0.72);
+  box.innerHTML = `<div class="hud"><span>Tiempo: <b id="mt">${t}</b> s</span><span class="mut">${niebla ? 'CON NIEBLA' : 'LLEGA A LA META'}</span></div>
+  <div class="maze" id="mz" style="grid-template-columns:repeat(${W},1fr);font-size:${fs}px"></div>
+  <div class="joy-wrap"><div class="joy-base"><div class="joy-arrows"><span class="u">▲</span><span class="d">▼</span><span class="l">◀</span><span class="r">▶</span></div><div class="joy-knob">💘</div></div></div>`;
+  const ver = () => {
+    if (!niebla) return;
+    for (let y = 0; y < W; y++) for (let x = 0; x < W; x++) if ((x - px) ** 2 + (y - py) ** 2 <= niebla * niebla) vis.add(x + ',' + y);
+  };
+  const dib = () => {
+    ver();
+    let h = '';
+    for (let y = 0; y < W; y++) for (let x = 0; x < W; x++) {
+      const vi = !niebla || (x - px) ** 2 + (y - py) ** 2 <= niebla * niebla;
+      const mem = !vi && vis.has(x + ',' + y);
+      let cls = 'c ' + (M[y][x] ? 'w' : 'p');
+      if (!vi && !mem) cls = 'c fg'; else if (mem) cls += ' me';
+      let ct = '';
+      if (x === px && y === py) ct = '💘'; else if (x === fx && y === fy && (vi || mem)) ct = '🏁';
+      h += `<div class="${cls}">${ct}</div>`;
+    }
+    $('#mz').innerHTML = h;
+  };
+  const mover = d => {
+    if (!vivo) return;
+    const v = { U: [0, -1], D: [0, 1], L: [-1, 0], R: [1, 0] }[d];
+    if (!v) return;
+    const nx = px + v[0], ny = py + v[1];
+    if (nx < 0 || ny < 0 || nx >= W || ny >= W || M[ny][nx]) return;
+    px = nx; py = ny; dib();
+    if (px === fx && py === fy) { vivo = false; api.prog(1); api.after(() => api.fin(true, `Te sobraron ${t} segundos.`), 500); }
+  };
+  const stopJoy = crearJoystick(box, mover);
+  const iv = setInterval(() => {
+    if (!vivo) return;
+    t--; $('#mt').textContent = t; api.prog(1 - t / tiempo);
+    if (t <= 0) { vivo = false; api.fin(false, 'Se acabó el tiempo.'); }
+  }, 1000);
+  api.onClose(() => { clearInterval(iv); if (stopJoy) stopJoy(); vivo = false; });
+  flechas(api, mover);
+  dib();
+}
+
+/* =====================================================================
+   SOPA DE LETRAS (Arrastrando el dedo o tocando inicio y fin)
+   ===================================================================== */
+function sopa(box, N, api) {
+  const pals = [...new Set((N.palabras || ['MORR', 'ATLETI']).map(w => norm(w).replace(/[^A-ZÑ]/g, '')).filter(Boolean))];
+  let S = N.tam || 10;
+  S = Math.max(S, ...pals.map(w => w.length));
+  const DIRS = [[1, 0], [0, 1], [1, 1], [-1, 0], [0, -1], [-1, -1], [1, -1], [-1, 1]], nd = Math.min(8, N.dir || 3);
+  const gen = () => {
+    const g = Array.from({ length: S }, () => Array(S).fill(''));
+    for (const w of pals.slice().sort((a, b) => b.length - a.length)) {
+      let ok = false;
+      for (let t = 0; t < 400 && !ok; t++) {
+        const [dx, dy] = DIRS[rnd(nd)], x0 = rnd(S), y0 = rnd(S), x1 = x0 + dx * (w.length - 1), y1 = y0 + dy * (w.length - 1);
+        if (x1 < 0 || y1 < 0 || x1 >= S || y1 >= S) continue;
+        let cabe = true;
+        for (let k = 0; k < w.length; k++) { const c = g[y0 + dy * k][x0 + dx * k]; if (c && c !== w[k]) { cabe = false; break; } }
+        if (!cabe) continue;
+        for (let k = 0; k < w.length; k++) g[y0 + dy * k][x0 + dx * k] = w[k];
+        ok = true;
+      }
+      if (!ok) return null;
+    }
+    const abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) if (!g[y][x]) g[y][x] = abc[rnd(26)];
+    return g;
+  };
+  let g = null;
+  for (let t = 0; t < 40 && !g; t++) g = gen();
+  if (!g) { box.innerHTML = '<p>No se ha podido generar la sopa. Revisa las palabras en contenido.js.</p>'; return; }
+  const hall = new Set(), enc = new Set();
+  let ini = null, prevSel = new Set(), vivo = true;
+  box.innerHTML = `<div class="gt">Sopa de letras</div><p class="gs">Arrastra el dedo (o toca inicio y fin) sobre cada palabra.</p><div class="sg" id="sg" style="grid-template-columns:repeat(${S},1fr)"></div><div class="chips" id="ch"></div>`;
+
+  const pinta = () => {
+    $('#sg').innerHTML = g.map((f, y) => f.map((c, x) => {
+      const k = x + ',' + y;
+      const isSel = prevSel.has(k) || (ini && ini.x === x && ini.y === y);
+      return `<button class="sc ${enc.has(k) ? 'f' : ''} ${isSel ? 'sel' : ''}" data-x="${x}" data-y="${y}">${c}</button>`;
+    }).join('')).join('');
+    $('#ch').innerHTML = pals.map(p => `<span class="chip ${hall.has(p) ? 'h' : ''}">${p}</span>`).join('');
+  };
+
+  const lineaCeldas = (a, b) => {
+    const dx = b.x - a.x, dy = b.y - a.y;
+    if (!(dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy))) return null;
+    const n = Math.max(Math.abs(dx), Math.abs(dy)), sx = Math.sign(dx), sy = Math.sign(dy);
+    let s = ''; const cs = [];
+    for (let k = 0; k <= n; k++) { const cx = a.x + sx * k, cy = a.y + sy * k; s += g[cy][cx]; cs.push(cx + ',' + cy); }
+    return { s, cs };
+  };
+
+  const comprobarLinea = (a, b) => {
+    const res = lineaCeldas(a, b);
+    if (!res) return false;
+    const rev = [...res.s].reverse().join('');
+    const w = pals.find(p => !hall.has(p) && (p === res.s || p === rev));
+    if (w) {
+      hall.add(w); res.cs.forEach(c => enc.add(c)); api.prog(hall.size / pals.length);
+      if (hall.size === pals.length) { vivo = false; api.after(() => api.fin(true, 'Las has encontrado todas.'), 600); }
+      return true;
+    }
+    return false;
+  };
+
+  const sg = $('#sg');
+  sg.onclick = e => {
+    const b = e.target.closest('button');
+    if (!b || !vivo) return;
+    const x = +b.dataset.x, y = +b.dataset.y;
+    if (!ini || (ini.x === x && ini.y === y)) { ini = ini ? null : { x, y }; prevSel.clear(); pinta(); return; }
+    comprobarLinea(ini, { x, y });
+    ini = null; prevSel.clear(); pinta();
+  };
+
+  // Soporte táctil de arrastre continuo
+  let dragging = false;
+  sg.addEventListener('touchstart', e => {
+    if (!vivo) return;
+    const t = e.touches[0], el = document.elementFromPoint(t.clientX, t.clientY)?.closest('.sc');
+    if (el) { dragging = true; ini = { x: +el.dataset.x, y: +el.dataset.y }; prevSel = new Set([ini.x + ',' + ini.y]); pinta(); }
+  }, { passive: true });
+
+  sg.addEventListener('touchmove', e => {
+    if (!dragging || !ini || !vivo) return;
+    e.preventDefault();
+    const t = e.touches[0], el = document.elementFromPoint(t.clientX, t.clientY)?.closest('.sc');
+    if (el) {
+      const res = lineaCeldas(ini, { x: +el.dataset.x, y: +el.dataset.y });
+      if (res) { prevSel = new Set(res.cs); pinta(); }
+    }
+  }, { passive: false });
+
+  sg.addEventListener('touchend', e => {
+    if (!dragging || !ini) return;
+    dragging = false;
+    const t = e.changedTouches[0], el = document.elementFromPoint(t.clientX, t.clientY)?.closest('.sc');
+    if (el && (ini.x !== +el.dataset.x || ini.y !== +el.dataset.y)) {
+      comprobarLinea(ini, { x: +el.dataset.x, y: +el.dataset.y });
+      ini = null; prevSel.clear(); pinta();
+    }
+  });
+
+  api.onClose(() => { vivo = false; });
+  pinta();
+}
+
+/* =====================================================================
+   SECUENCIA (Simon)
+   ===================================================================== */
+function simon(box, N, api) {
+  const rondas = N.rondas || 6, cols = ['#ef4444', '#3b82f6', '#22c55e', '#eab308'], tonos = [262, 330, 392, 523];
+  const seq = [];
+  let pos = 0, acep = false;
+  box.innerHTML = `<div class="gt cen">Secuencia</div><p class="gs cen" id="sm">Mira…</p><div class="sm">${cols.map((c, i) => `<button class="sp" data-c="${i}" style="background:${c}"></button>`).join('')}</div>`;
+  const pads = [...box.querySelectorAll('.sp')];
+  const msg = t => { $('#sm').textContent = t; };
+  const luz = (c, ms) => { pads[c].classList.add('on'); tono(tonos[c]); api.after(() => pads[c].classList.remove('on'), ms || 300); };
+  const mostrar = () => {
+    acep = false; msg('Mira…');
+    const vel = Math.max(300, (N.vel || 650) - seq.length * 30);
+    let t = 600;
+    seq.forEach(c => { api.after(() => luz(c, vel * 0.6), t); t += vel; });
+    api.after(() => { acep = true; pos = 0; msg('Tu turno'); }, t);
+  };
+  const nueva = () => { seq.push(rnd(4)); mostrar(); };
+  pads.forEach(p => p.onclick = () => {
+    if (!acep) return;
+    const c = +p.dataset.c;
+    luz(c, 200);
+    if (c !== seq[pos]) { acep = false; api.after(() => api.fin(false, `Fallaste en la ronda ${seq.length}.`), 500); return; }
+    pos++;
+    if (pos === seq.length) {
+      acep = false; api.prog(seq.length / rondas); msg('Bien');
+      if (seq.length >= rondas) api.after(() => api.fin(true, 'Secuencia completa.'), 600);
+      else api.after(nueva, 900);
+    }
+  });
+  nueva();
+}
+
+/* =====================================================================
+   Arranque
+   ===================================================================== */
+function precargar() {
+  return Promise.all(C.fotos.map(src => new Promise(r => {
+    const i = new Image();
+    i.onload = () => r(src);
+    i.onerror = () => r(null);
+    i.src = src;
+  }))).then(l => { fotos = l.filter(Boolean); });
+}
+function fondo() {
+  const e = ['💖', '💜', '🩷', '💗', '💕'];
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('span');
+    s.className = 'bg';
+    s.textContent = e[i % e.length];
+    s.style.left = Math.random() * 100 + '%';
+    s.style.fontSize = (14 + Math.random() * 18) + 'px';
+    s.style.animationDuration = (10 + Math.random() * 12) + 's';
+    s.style.animationDelay = (-Math.random() * 20) + 's';
+    document.body.appendChild(s);
+  }
+}
+fondo();
+cargar();
+precargar().then(() => home(true));
+</script>
+</body>
+</html>
