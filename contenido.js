@@ -196,7 +196,7 @@ const CONTENIDO = {
         { tipo: 'preguntas' },
         { tipo: 'juego', juego: 'sopa', palabras: ['ATLETI', 'PARQUE', 'AIRE', 'MORR', 'PINGUINO', 'CAMISETA'], tam: 11, dir: 5 }, // <-- PALABRAS SOPA: ATLETI, PARQUE, AIRE, MORR, PINGUINO, CAMISETA
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'tetris', meta: 800, vel: 700 }
+        { tipo: 'juego', juego: 'tetris', meta: 600, vel: 1000 }
       ]
     },
 
@@ -246,7 +246,7 @@ const CONTENIDO = {
         { tipo: 'preguntas' },
         { tipo: 'juego', juego: 'laberinto', tam: 21, tiempo: 100, niebla: 4 },
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'tetris', meta: 1200, vel: 650 }
+        { tipo: 'juego', juego: 'tetris', meta: 800, vel: 960 }
       ]
     },
 
@@ -296,8 +296,8 @@ const CONTENIDO = {
         { tipo: 'preguntas' },
         { tipo: 'juego', juego: 'sopa', palabras: ['VICTORIA', 'HECTOR', 'ATLETI', 'PARQUE', 'TELEFONICA', 'BANCO', 'FAUNIA', 'ESTACION'], tam: 12, dir: 8 }, // <-- PALABRAS SOPA: VICTORIA, HECTOR, ATLETI, PARQUE, TELEFONICA, BANCO, FAUNIA, ESTACION
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'tetris', meta: 2000, vel: 600 }
-      ]
+        { tipo: 'juego', juego: 'tetris', meta: 1000, vel: 860 }
+      ] 
     }
   ]
 };
