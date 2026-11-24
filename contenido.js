@@ -242,7 +242,7 @@ const CONTENIDO = {
         { tipo: 'preguntas' },
         { tipo: 'juego', juego: 'simon', rondas: 7, vel: 550 },
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'puzzle', tam: 4, foto: 1 }, // <-- USA foto2.jpeg (índice 1)
+        { tipo: 'juego', juego: 'puzzle', tam: 3, foto: 1 }, // <-- USA foto2.jpeg (índice 1)
         { tipo: 'preguntas' },
         { tipo: 'juego', juego: 'laberinto', tam: 21, tiempo: 100, niebla: 4 },
         { tipo: 'preguntas' },
