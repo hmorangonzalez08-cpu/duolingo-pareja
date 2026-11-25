@@ -290,13 +290,13 @@ const CONTENIDO = {
         { tipo: 'preguntas' },
         { tipo: 'juego', juego: 'ahorcado', palabra: 'VICTORIA', pista: 'Mi persona favorita', fallos: 5 }, // <-- PALABRA SECRETA AHORCADO: VICTORIA
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'memoria', pares: 12, fallos: 10 },
+        { tipo: 'juego', juego: 'memoria', pares: 12, fallos: 20 },
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'snake', meta: 10, vel: 220, muros: 8 },
+        { tipo: 'juego', juego: 'snake', meta: 6, vel: 220, muros: 6 },
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'sopa', palabras: ['VICTORIA', 'HECTOR', 'ATLETI', 'PARQUE', 'TELEFONICA', 'BANCO', 'FAUNIA', 'ESTACION'], tam: 12, dir: 8 }, // <-- PALABRAS SOPA: VICTORIA, HECTOR, ATLETI, PARQUE, TELEFONICA, BANCO, FAUNIA, ESTACION
+        { tipo: 'juego', juego: 'sopa', palabras: ['VICTORIA', 'HECTOR', 'BAÑO', 'PARQUE', 'TELEFONICA', 'BANCO', 'FAUNIA', 'ESTACION'], tam: 20, dir: 8 }, // <-- PALABRAS SOPA: VICTORIA, HECTOR, ATLETI, PARQUE, TELEFONICA, BANCO, FAUNIA, ESTACION
         { tipo: 'preguntas' },
-        { tipo: 'juego', juego: 'tetris', meta: 1000, vel: 860 }
+        { tipo: 'juego', juego: 'tetris', meta: 800, vel: 860 }
       ] 
     }
   ]
